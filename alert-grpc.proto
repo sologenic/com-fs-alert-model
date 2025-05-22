@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package alert;
+
+import "google/protobuf/Empty.proto";
+import "alert.proto";
+
+option go_package = "github.com/sologenic/com-fs-alert-model;alert";
+
+service AlertService {
+    rpc UpsertAlert(Alert) returns (google.protobuf.Empty) {}
+    rpc DeleteAlert(AlertID) returns (google.protobuf.Empty) {}
+    rpc GetAlert(SelectOptions) returns (Alert) {}
+    rpc List(AlertFilter) returns (AlertList) {}
+}

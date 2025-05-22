@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package alert;
+
+import "sologenic/com-fs-utils-lib/models/metadata/metadata.proto";
+import "sologenic/com-fs-utils-lib/models/audit/audit.proto";
+
+option go_package = "github.com/sologenic/com-fs-alert-model;alert";
+
+message Alert{
+    AlertDetails Alert = 1;
+    metadata.Metadata Metadata = 2;
+    audit.Audit Audit = 3;
+}
+
+message AlertDetails{
+  string AlertID = 1;
+  string UserID = 2;
+  string Symbol = 3;                // e.g. "AAPL"
+  double TargetPrice = 4;           // e.g. 220.00
+  string Currency = 5;              // e.g. "USD"
+  TriggerDirection Direction = 6;   // e.g. "ABOVE" or "BELOW"         
+  string Status = 7;                // e.g. "ACTIVE", "TRIGGERED", "CANCELLED"
+  string OrganizationID = 8;
+
+}
+
+message AlertID {
+  string Value = 1;
+}
+
+message AlertFilter {
+    string OrganizationID = 1;
+    optional metadata.Network Network = 3;
+    optional int32 Offset = 4;
+    optional int32 Limit = 5;
+}
+
+message AlertList {
+  repeated Alert Alerts = 1;
+}
+
+enum TriggerDirection {
+  ABOVE = 0;
+  BELOW = 1;
+}
+
+enum AlertStatus {
+    DO_NOT_USE = 0;
+  ACTIVE = 1;
+  TRIGGERED = 2;
+  CANCELLED = 3;
+}
+
