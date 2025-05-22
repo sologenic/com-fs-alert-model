@@ -144,7 +144,7 @@ exports.Alert = {
     },
 };
 function createBaseAlertDetails() {
-    return { AlertID: "", UserID: "", Symbol: "", TargetPrice: 0, Currency: "", Status: "", OrganizationID: "" };
+    return { AlertID: "", UserID: "", AssetKey: "", TargetPrice: 0, Status: "", OrganizationID: "" };
 }
 exports.AlertDetails = {
     encode(message, writer = minimal_1.default.Writer.create()) {
@@ -154,20 +154,17 @@ exports.AlertDetails = {
         if (message.UserID !== "") {
             writer.uint32(18).string(message.UserID);
         }
-        if (message.Symbol !== "") {
-            writer.uint32(26).string(message.Symbol);
+        if (message.AssetKey !== "") {
+            writer.uint32(26).string(message.AssetKey);
         }
         if (message.TargetPrice !== 0) {
             writer.uint32(33).double(message.TargetPrice);
         }
-        if (message.Currency !== "") {
-            writer.uint32(42).string(message.Currency);
-        }
         if (message.Status !== "") {
-            writer.uint32(50).string(message.Status);
+            writer.uint32(42).string(message.Status);
         }
         if (message.OrganizationID !== "") {
-            writer.uint32(58).string(message.OrganizationID);
+            writer.uint32(50).string(message.OrganizationID);
         }
         return writer;
     },
@@ -194,7 +191,7 @@ exports.AlertDetails = {
                     if (tag !== 26) {
                         break;
                     }
-                    message.Symbol = reader.string();
+                    message.AssetKey = reader.string();
                     continue;
                 case 4:
                     if (tag !== 33) {
@@ -206,16 +203,10 @@ exports.AlertDetails = {
                     if (tag !== 42) {
                         break;
                     }
-                    message.Currency = reader.string();
+                    message.Status = reader.string();
                     continue;
                 case 6:
                     if (tag !== 50) {
-                        break;
-                    }
-                    message.Status = reader.string();
-                    continue;
-                case 7:
-                    if (tag !== 58) {
                         break;
                     }
                     message.OrganizationID = reader.string();
@@ -232,9 +223,8 @@ exports.AlertDetails = {
         return {
             AlertID: isSet(object.AlertID) ? globalThis.String(object.AlertID) : "",
             UserID: isSet(object.UserID) ? globalThis.String(object.UserID) : "",
-            Symbol: isSet(object.Symbol) ? globalThis.String(object.Symbol) : "",
+            AssetKey: isSet(object.AssetKey) ? globalThis.String(object.AssetKey) : "",
             TargetPrice: isSet(object.TargetPrice) ? globalThis.Number(object.TargetPrice) : 0,
-            Currency: isSet(object.Currency) ? globalThis.String(object.Currency) : "",
             Status: isSet(object.Status) ? globalThis.String(object.Status) : "",
             OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
         };
@@ -247,14 +237,11 @@ exports.AlertDetails = {
         if (message.UserID !== "") {
             obj.UserID = message.UserID;
         }
-        if (message.Symbol !== "") {
-            obj.Symbol = message.Symbol;
+        if (message.AssetKey !== "") {
+            obj.AssetKey = message.AssetKey;
         }
         if (message.TargetPrice !== 0) {
             obj.TargetPrice = message.TargetPrice;
-        }
-        if (message.Currency !== "") {
-            obj.Currency = message.Currency;
         }
         if (message.Status !== "") {
             obj.Status = message.Status;
@@ -268,15 +255,14 @@ exports.AlertDetails = {
         return exports.AlertDetails.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-        var _a, _b, _c, _d, _e, _f, _g;
+        var _a, _b, _c, _d, _e, _f;
         const message = createBaseAlertDetails();
         message.AlertID = (_a = object.AlertID) !== null && _a !== void 0 ? _a : "";
         message.UserID = (_b = object.UserID) !== null && _b !== void 0 ? _b : "";
-        message.Symbol = (_c = object.Symbol) !== null && _c !== void 0 ? _c : "";
+        message.AssetKey = (_c = object.AssetKey) !== null && _c !== void 0 ? _c : "";
         message.TargetPrice = (_d = object.TargetPrice) !== null && _d !== void 0 ? _d : 0;
-        message.Currency = (_e = object.Currency) !== null && _e !== void 0 ? _e : "";
-        message.Status = (_f = object.Status) !== null && _f !== void 0 ? _f : "";
-        message.OrganizationID = (_g = object.OrganizationID) !== null && _g !== void 0 ? _g : "";
+        message.Status = (_e = object.Status) !== null && _e !== void 0 ? _e : "";
+        message.OrganizationID = (_f = object.OrganizationID) !== null && _f !== void 0 ? _f : "";
         return message;
     },
 };

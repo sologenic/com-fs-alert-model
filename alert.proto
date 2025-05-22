@@ -13,16 +13,15 @@ message Alert{
     audit.Audit Audit = 3;
 }
 
-message AlertDetails{
+message AlertDetails {
     string AlertID = 1;
     string UserID = 2;
-    string Symbol = 3;                // e.g. "AAPL"
-    double TargetPrice = 4;           // e.g. 220.00
-    string Currency = 5;              // e.g. "USD"
-    string Status = 6;                // e.g. "ACTIVE", "TRIGGERED", "CANCELLED"
-    string OrganizationID = 7;
-
+    string AssetKey = 3;            
+    double TargetPrice = 4;
+    string Status = 5;
+    string OrganizationID = 6;
 }
+
 
 message AlertID {
     string Value = 1;

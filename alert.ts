@@ -70,13 +70,8 @@ export interface Alert {
 export interface AlertDetails {
   AlertID: string;
   UserID: string;
-  /** e.g. "AAPL" */
-  Symbol: string;
-  /** e.g. 220.00 */
+  AssetKey: string;
   TargetPrice: number;
-  /** e.g. "USD" */
-  Currency: string;
-  /** e.g. "ACTIVE", "TRIGGERED", "CANCELLED" */
   Status: string;
   OrganizationID: string;
 }
@@ -190,7 +185,7 @@ export const Alert = {
 };
 
 function createBaseAlertDetails(): AlertDetails {
-  return { AlertID: "", UserID: "", Symbol: "", TargetPrice: 0, Currency: "", Status: "", OrganizationID: "" };
+  return { AlertID: "", UserID: "", AssetKey: "", TargetPrice: 0, Status: "", OrganizationID: "" };
 }
 
 export const AlertDetails = {
@@ -201,20 +196,17 @@ export const AlertDetails = {
     if (message.UserID !== "") {
       writer.uint32(18).string(message.UserID);
     }
-    if (message.Symbol !== "") {
-      writer.uint32(26).string(message.Symbol);
+    if (message.AssetKey !== "") {
+      writer.uint32(26).string(message.AssetKey);
     }
     if (message.TargetPrice !== 0) {
       writer.uint32(33).double(message.TargetPrice);
     }
-    if (message.Currency !== "") {
-      writer.uint32(42).string(message.Currency);
-    }
     if (message.Status !== "") {
-      writer.uint32(50).string(message.Status);
+      writer.uint32(42).string(message.Status);
     }
     if (message.OrganizationID !== "") {
-      writer.uint32(58).string(message.OrganizationID);
+      writer.uint32(50).string(message.OrganizationID);
     }
     return writer;
   },
@@ -245,7 +237,7 @@ export const AlertDetails = {
             break;
           }
 
-          message.Symbol = reader.string();
+          message.AssetKey = reader.string();
           continue;
         case 4:
           if (tag !== 33) {
@@ -259,17 +251,10 @@ export const AlertDetails = {
             break;
           }
 
-          message.Currency = reader.string();
+          message.Status = reader.string();
           continue;
         case 6:
           if (tag !== 50) {
-            break;
-          }
-
-          message.Status = reader.string();
-          continue;
-        case 7:
-          if (tag !== 58) {
             break;
           }
 
@@ -288,9 +273,8 @@ export const AlertDetails = {
     return {
       AlertID: isSet(object.AlertID) ? globalThis.String(object.AlertID) : "",
       UserID: isSet(object.UserID) ? globalThis.String(object.UserID) : "",
-      Symbol: isSet(object.Symbol) ? globalThis.String(object.Symbol) : "",
+      AssetKey: isSet(object.AssetKey) ? globalThis.String(object.AssetKey) : "",
       TargetPrice: isSet(object.TargetPrice) ? globalThis.Number(object.TargetPrice) : 0,
-      Currency: isSet(object.Currency) ? globalThis.String(object.Currency) : "",
       Status: isSet(object.Status) ? globalThis.String(object.Status) : "",
       OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
     };
@@ -304,14 +288,11 @@ export const AlertDetails = {
     if (message.UserID !== "") {
       obj.UserID = message.UserID;
     }
-    if (message.Symbol !== "") {
-      obj.Symbol = message.Symbol;
+    if (message.AssetKey !== "") {
+      obj.AssetKey = message.AssetKey;
     }
     if (message.TargetPrice !== 0) {
       obj.TargetPrice = message.TargetPrice;
-    }
-    if (message.Currency !== "") {
-      obj.Currency = message.Currency;
     }
     if (message.Status !== "") {
       obj.Status = message.Status;
@@ -329,9 +310,8 @@ export const AlertDetails = {
     const message = createBaseAlertDetails();
     message.AlertID = object.AlertID ?? "";
     message.UserID = object.UserID ?? "";
-    message.Symbol = object.Symbol ?? "";
+    message.AssetKey = object.AssetKey ?? "";
     message.TargetPrice = object.TargetPrice ?? 0;
-    message.Currency = object.Currency ?? "";
     message.Status = object.Status ?? "";
     message.OrganizationID = object.OrganizationID ?? "";
     return message;
