@@ -36,6 +36,8 @@ message AlertFilter {
 
 message AlertList {
     repeated Alert Alerts = 1;
+    optional int32 Offset = 2;
+    optional int32 Limit = 3; 
 }
 
 enum AlertStatus {

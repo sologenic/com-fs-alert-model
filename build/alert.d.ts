@@ -35,6 +35,8 @@ export interface AlertFilter {
 }
 export interface AlertList {
     Alerts: Alert[];
+    Offset?: number | undefined;
+    Limit?: number | undefined;
 }
 export declare const Alert: {
     encode(message: Alert, writer?: _m0.Writer): _m0.Writer;
@@ -263,6 +265,8 @@ export declare const AlertList: {
                 Reason?: string | undefined;
             } | undefined;
         }[] | undefined;
+        Offset?: number | undefined;
+        Limit?: number | undefined;
     } & {
         Alerts?: ({
             Alert?: {
@@ -361,7 +365,9 @@ export declare const AlertList: {
                 Reason?: string | undefined;
             } | undefined;
         }[]>]: never; }) | undefined;
-    } & { [K_5 in Exclude<keyof I, "Alerts">]: never; }>(base?: I | undefined): AlertList;
+        Offset?: number | undefined;
+        Limit?: number | undefined;
+    } & { [K_5 in Exclude<keyof I, keyof AlertList>]: never; }>(base?: I | undefined): AlertList;
     fromPartial<I_1 extends {
         Alerts?: {
             Alert?: {
@@ -384,6 +390,8 @@ export declare const AlertList: {
                 Reason?: string | undefined;
             } | undefined;
         }[] | undefined;
+        Offset?: number | undefined;
+        Limit?: number | undefined;
     } & {
         Alerts?: ({
             Alert?: {
@@ -482,7 +490,9 @@ export declare const AlertList: {
                 Reason?: string | undefined;
             } | undefined;
         }[]>]: never; }) | undefined;
-    } & { [K_11 in Exclude<keyof I_1, "Alerts">]: never; }>(object: I_1): AlertList;
+        Offset?: number | undefined;
+        Limit?: number | undefined;
+    } & { [K_11 in Exclude<keyof I_1, keyof AlertList>]: never; }>(object: I_1): AlertList;
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 export type DeepPartial<T> = T extends Builtin ? T : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {

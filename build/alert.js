@@ -413,12 +413,18 @@ exports.AlertFilter = {
     },
 };
 function createBaseAlertList() {
-    return { Alerts: [] };
+    return { Alerts: [], Offset: undefined, Limit: undefined };
 }
 exports.AlertList = {
     encode(message, writer = minimal_1.default.Writer.create()) {
         for (const v of message.Alerts) {
             exports.Alert.encode(v, writer.uint32(10).fork()).ldelim();
+        }
+        if (message.Offset !== undefined) {
+            writer.uint32(16).int32(message.Offset);
+        }
+        if (message.Limit !== undefined) {
+            writer.uint32(24).int32(message.Limit);
         }
         return writer;
     },
@@ -435,6 +441,18 @@ exports.AlertList = {
                     }
                     message.Alerts.push(exports.Alert.decode(reader, reader.uint32()));
                     continue;
+                case 2:
+                    if (tag !== 16) {
+                        break;
+                    }
+                    message.Offset = reader.int32();
+                    continue;
+                case 3:
+                    if (tag !== 24) {
+                        break;
+                    }
+                    message.Limit = reader.int32();
+                    continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
                 break;
@@ -444,7 +462,11 @@ exports.AlertList = {
         return message;
     },
     fromJSON(object) {
-        return { Alerts: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.Alerts) ? object.Alerts.map((e) => exports.Alert.fromJSON(e)) : [] };
+        return {
+            Alerts: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.Alerts) ? object.Alerts.map((e) => exports.Alert.fromJSON(e)) : [],
+            Offset: isSet(object.Offset) ? globalThis.Number(object.Offset) : undefined,
+            Limit: isSet(object.Limit) ? globalThis.Number(object.Limit) : undefined,
+        };
     },
     toJSON(message) {
         var _a;
@@ -452,15 +474,23 @@ exports.AlertList = {
         if ((_a = message.Alerts) === null || _a === void 0 ? void 0 : _a.length) {
             obj.Alerts = message.Alerts.map((e) => exports.Alert.toJSON(e));
         }
+        if (message.Offset !== undefined) {
+            obj.Offset = Math.round(message.Offset);
+        }
+        if (message.Limit !== undefined) {
+            obj.Limit = Math.round(message.Limit);
+        }
         return obj;
     },
     create(base) {
         return exports.AlertList.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-        var _a;
+        var _a, _b, _c;
         const message = createBaseAlertList();
         message.Alerts = ((_a = object.Alerts) === null || _a === void 0 ? void 0 : _a.map((e) => exports.Alert.fromPartial(e))) || [];
+        message.Offset = (_b = object.Offset) !== null && _b !== void 0 ? _b : undefined;
+        message.Limit = (_c = object.Limit) !== null && _c !== void 0 ? _c : undefined;
         return message;
     },
 };
