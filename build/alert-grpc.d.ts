@@ -6,8 +6,8 @@ import { Empty } from "./google/protobuf/Empty";
 export declare const protobufPackage = "alert";
 export type AlertServiceService = typeof AlertServiceService;
 export declare const AlertServiceService: {
-    readonly upsertAlert: {
-        readonly path: "/alert.AlertService/UpsertAlert";
+    readonly upsert: {
+        readonly path: "/alert.AlertService/Upsert";
         readonly requestStream: false;
         readonly responseStream: false;
         readonly requestSerialize: (value: Alert) => Buffer;
@@ -15,8 +15,8 @@ export declare const AlertServiceService: {
         readonly responseSerialize: (value: Empty) => Buffer;
         readonly responseDeserialize: (value: Buffer) => Empty;
     };
-    readonly deleteAlert: {
-        readonly path: "/alert.AlertService/DeleteAlert";
+    readonly delete: {
+        readonly path: "/alert.AlertService/Delete";
         readonly requestStream: false;
         readonly responseStream: false;
         readonly requestSerialize: (value: AlertID) => Buffer;
@@ -24,8 +24,8 @@ export declare const AlertServiceService: {
         readonly responseSerialize: (value: Empty) => Buffer;
         readonly responseDeserialize: (value: Buffer) => Empty;
     };
-    readonly getAlert: {
-        readonly path: "/alert.AlertService/GetAlert";
+    readonly get: {
+        readonly path: "/alert.AlertService/Get";
         readonly requestStream: false;
         readonly responseStream: false;
         readonly requestSerialize: (value: AlertID) => Buffer;
@@ -44,21 +44,21 @@ export declare const AlertServiceService: {
     };
 };
 export interface AlertServiceServer extends UntypedServiceImplementation {
-    upsertAlert: handleUnaryCall<Alert, Empty>;
-    deleteAlert: handleUnaryCall<AlertID, Empty>;
-    getAlert: handleUnaryCall<AlertID, Alert>;
+    upsert: handleUnaryCall<Alert, Empty>;
+    delete: handleUnaryCall<AlertID, Empty>;
+    get: handleUnaryCall<AlertID, Alert>;
     list: handleUnaryCall<AlertFilter, AlertList>;
 }
 export interface AlertServiceClient extends Client {
-    upsertAlert(request: Alert, callback: (error: ServiceError | null, response: Empty) => void): ClientUnaryCall;
-    upsertAlert(request: Alert, metadata: Metadata, callback: (error: ServiceError | null, response: Empty) => void): ClientUnaryCall;
-    upsertAlert(request: Alert, metadata: Metadata, options: Partial<CallOptions>, callback: (error: ServiceError | null, response: Empty) => void): ClientUnaryCall;
-    deleteAlert(request: AlertID, callback: (error: ServiceError | null, response: Empty) => void): ClientUnaryCall;
-    deleteAlert(request: AlertID, metadata: Metadata, callback: (error: ServiceError | null, response: Empty) => void): ClientUnaryCall;
-    deleteAlert(request: AlertID, metadata: Metadata, options: Partial<CallOptions>, callback: (error: ServiceError | null, response: Empty) => void): ClientUnaryCall;
-    getAlert(request: AlertID, callback: (error: ServiceError | null, response: Alert) => void): ClientUnaryCall;
-    getAlert(request: AlertID, metadata: Metadata, callback: (error: ServiceError | null, response: Alert) => void): ClientUnaryCall;
-    getAlert(request: AlertID, metadata: Metadata, options: Partial<CallOptions>, callback: (error: ServiceError | null, response: Alert) => void): ClientUnaryCall;
+    upsert(request: Alert, callback: (error: ServiceError | null, response: Empty) => void): ClientUnaryCall;
+    upsert(request: Alert, metadata: Metadata, callback: (error: ServiceError | null, response: Empty) => void): ClientUnaryCall;
+    upsert(request: Alert, metadata: Metadata, options: Partial<CallOptions>, callback: (error: ServiceError | null, response: Empty) => void): ClientUnaryCall;
+    delete(request: AlertID, callback: (error: ServiceError | null, response: Empty) => void): ClientUnaryCall;
+    delete(request: AlertID, metadata: Metadata, callback: (error: ServiceError | null, response: Empty) => void): ClientUnaryCall;
+    delete(request: AlertID, metadata: Metadata, options: Partial<CallOptions>, callback: (error: ServiceError | null, response: Empty) => void): ClientUnaryCall;
+    get(request: AlertID, callback: (error: ServiceError | null, response: Alert) => void): ClientUnaryCall;
+    get(request: AlertID, metadata: Metadata, callback: (error: ServiceError | null, response: Alert) => void): ClientUnaryCall;
+    get(request: AlertID, metadata: Metadata, options: Partial<CallOptions>, callback: (error: ServiceError | null, response: Alert) => void): ClientUnaryCall;
     list(request: AlertFilter, callback: (error: ServiceError | null, response: AlertList) => void): ClientUnaryCall;
     list(request: AlertFilter, metadata: Metadata, callback: (error: ServiceError | null, response: AlertList) => void): ClientUnaryCall;
     list(request: AlertFilter, metadata: Metadata, options: Partial<CallOptions>, callback: (error: ServiceError | null, response: AlertList) => void): ClientUnaryCall;

@@ -20,19 +20,19 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	AlertService_UpsertAlert_FullMethodName = "/alert.AlertService/UpsertAlert"
-	AlertService_DeleteAlert_FullMethodName = "/alert.AlertService/DeleteAlert"
-	AlertService_GetAlert_FullMethodName    = "/alert.AlertService/GetAlert"
-	AlertService_List_FullMethodName        = "/alert.AlertService/List"
+	AlertService_Upsert_FullMethodName = "/alert.AlertService/Upsert"
+	AlertService_Delete_FullMethodName = "/alert.AlertService/Delete"
+	AlertService_Get_FullMethodName    = "/alert.AlertService/Get"
+	AlertService_List_FullMethodName   = "/alert.AlertService/List"
 )
 
 // AlertServiceClient is the client API for AlertService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AlertServiceClient interface {
-	UpsertAlert(ctx context.Context, in *Alert, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	DeleteAlert(ctx context.Context, in *AlertID, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	GetAlert(ctx context.Context, in *AlertID, opts ...grpc.CallOption) (*Alert, error)
+	Upsert(ctx context.Context, in *Alert, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	Delete(ctx context.Context, in *AlertID, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	Get(ctx context.Context, in *AlertID, opts ...grpc.CallOption) (*Alert, error)
 	List(ctx context.Context, in *AlertFilter, opts ...grpc.CallOption) (*AlertList, error)
 }
 
@@ -44,30 +44,30 @@ func NewAlertServiceClient(cc grpc.ClientConnInterface) AlertServiceClient {
 	return &alertServiceClient{cc}
 }
 
-func (c *alertServiceClient) UpsertAlert(ctx context.Context, in *Alert, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *alertServiceClient) Upsert(ctx context.Context, in *Alert, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, AlertService_UpsertAlert_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, AlertService_Upsert_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) DeleteAlert(ctx context.Context, in *AlertID, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *alertServiceClient) Delete(ctx context.Context, in *AlertID, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, AlertService_DeleteAlert_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, AlertService_Delete_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) GetAlert(ctx context.Context, in *AlertID, opts ...grpc.CallOption) (*Alert, error) {
+func (c *alertServiceClient) Get(ctx context.Context, in *AlertID, opts ...grpc.CallOption) (*Alert, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Alert)
-	err := c.cc.Invoke(ctx, AlertService_GetAlert_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, AlertService_Get_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -88,9 +88,9 @@ func (c *alertServiceClient) List(ctx context.Context, in *AlertFilter, opts ...
 // All implementations should embed UnimplementedAlertServiceServer
 // for forward compatibility.
 type AlertServiceServer interface {
-	UpsertAlert(context.Context, *Alert) (*emptypb.Empty, error)
-	DeleteAlert(context.Context, *AlertID) (*emptypb.Empty, error)
-	GetAlert(context.Context, *AlertID) (*Alert, error)
+	Upsert(context.Context, *Alert) (*emptypb.Empty, error)
+	Delete(context.Context, *AlertID) (*emptypb.Empty, error)
+	Get(context.Context, *AlertID) (*Alert, error)
 	List(context.Context, *AlertFilter) (*AlertList, error)
 }
 
@@ -101,14 +101,14 @@ type AlertServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedAlertServiceServer struct{}
 
-func (UnimplementedAlertServiceServer) UpsertAlert(context.Context, *Alert) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpsertAlert not implemented")
+func (UnimplementedAlertServiceServer) Upsert(context.Context, *Alert) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Upsert not implemented")
 }
-func (UnimplementedAlertServiceServer) DeleteAlert(context.Context, *AlertID) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteAlert not implemented")
+func (UnimplementedAlertServiceServer) Delete(context.Context, *AlertID) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
-func (UnimplementedAlertServiceServer) GetAlert(context.Context, *AlertID) (*Alert, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAlert not implemented")
+func (UnimplementedAlertServiceServer) Get(context.Context, *AlertID) (*Alert, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
 func (UnimplementedAlertServiceServer) List(context.Context, *AlertFilter) (*AlertList, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
@@ -133,56 +133,56 @@ func RegisterAlertServiceServer(s grpc.ServiceRegistrar, srv AlertServiceServer)
 	s.RegisterService(&AlertService_ServiceDesc, srv)
 }
 
-func _AlertService_UpsertAlert_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _AlertService_Upsert_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Alert)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AlertServiceServer).UpsertAlert(ctx, in)
+		return srv.(AlertServiceServer).Upsert(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AlertService_UpsertAlert_FullMethodName,
+		FullMethod: AlertService_Upsert_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AlertServiceServer).UpsertAlert(ctx, req.(*Alert))
+		return srv.(AlertServiceServer).Upsert(ctx, req.(*Alert))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AlertService_DeleteAlert_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _AlertService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AlertID)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AlertServiceServer).DeleteAlert(ctx, in)
+		return srv.(AlertServiceServer).Delete(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AlertService_DeleteAlert_FullMethodName,
+		FullMethod: AlertService_Delete_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AlertServiceServer).DeleteAlert(ctx, req.(*AlertID))
+		return srv.(AlertServiceServer).Delete(ctx, req.(*AlertID))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AlertService_GetAlert_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _AlertService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AlertID)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AlertServiceServer).GetAlert(ctx, in)
+		return srv.(AlertServiceServer).Get(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AlertService_GetAlert_FullMethodName,
+		FullMethod: AlertService_Get_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AlertServiceServer).GetAlert(ctx, req.(*AlertID))
+		return srv.(AlertServiceServer).Get(ctx, req.(*AlertID))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -213,16 +213,16 @@ var AlertService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*AlertServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "UpsertAlert",
-			Handler:    _AlertService_UpsertAlert_Handler,
+			MethodName: "Upsert",
+			Handler:    _AlertService_Upsert_Handler,
 		},
 		{
-			MethodName: "DeleteAlert",
-			Handler:    _AlertService_DeleteAlert_Handler,
+			MethodName: "Delete",
+			Handler:    _AlertService_Delete_Handler,
 		},
 		{
-			MethodName: "GetAlert",
-			Handler:    _AlertService_GetAlert_Handler,
+			MethodName: "Get",
+			Handler:    _AlertService_Get_Handler,
 		},
 		{
 			MethodName: "List",

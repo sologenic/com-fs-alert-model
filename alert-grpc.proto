@@ -8,8 +8,8 @@ import "alert.proto";
 option go_package = "github.com/sologenic/com-fs-alert-model;alert";
 
 service AlertService {
-    rpc UpsertAlert(Alert) returns (google.protobuf.Empty) {}
-    rpc DeleteAlert(AlertID) returns (google.protobuf.Empty) {}
-    rpc GetAlert(AlertID) returns (Alert) {}
+    rpc Upsert(Alert) returns (google.protobuf.Empty) {}
+    rpc Delete(AlertID) returns (google.protobuf.Empty) {}
+    rpc Get(AlertID) returns (Alert) {}
     rpc List(AlertFilter) returns (AlertList) {}
 }

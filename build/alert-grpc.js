@@ -12,8 +12,8 @@ const alert_1 = require("./alert");
 const Empty_1 = require("./google/protobuf/Empty");
 exports.protobufPackage = "alert";
 exports.AlertServiceService = {
-    upsertAlert: {
-        path: "/alert.AlertService/UpsertAlert",
+    upsert: {
+        path: "/alert.AlertService/Upsert",
         requestStream: false,
         responseStream: false,
         requestSerialize: (value) => Buffer.from(alert_1.Alert.encode(value).finish()),
@@ -21,8 +21,8 @@ exports.AlertServiceService = {
         responseSerialize: (value) => Buffer.from(Empty_1.Empty.encode(value).finish()),
         responseDeserialize: (value) => Empty_1.Empty.decode(value),
     },
-    deleteAlert: {
-        path: "/alert.AlertService/DeleteAlert",
+    delete: {
+        path: "/alert.AlertService/Delete",
         requestStream: false,
         responseStream: false,
         requestSerialize: (value) => Buffer.from(alert_1.AlertID.encode(value).finish()),
@@ -30,8 +30,8 @@ exports.AlertServiceService = {
         responseSerialize: (value) => Buffer.from(Empty_1.Empty.encode(value).finish()),
         responseDeserialize: (value) => Empty_1.Empty.decode(value),
     },
-    getAlert: {
-        path: "/alert.AlertService/GetAlert",
+    get: {
+        path: "/alert.AlertService/Get",
         requestStream: false,
         responseStream: false,
         requestSerialize: (value) => Buffer.from(alert_1.AlertID.encode(value).finish()),
