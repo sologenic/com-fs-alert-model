@@ -144,7 +144,7 @@ exports.Alert = {
     },
 };
 function createBaseAlertDetails() {
-    return { AlertID: "", UserID: "", AssetKey: "", TargetPrice: 0, Status: "", OrganizationID: "" };
+    return { AlertID: "", UserID: "", AssetKey: "", TargetPrice: 0, Status: 0, OrganizationID: "" };
 }
 exports.AlertDetails = {
     encode(message, writer = minimal_1.default.Writer.create()) {
@@ -160,8 +160,8 @@ exports.AlertDetails = {
         if (message.TargetPrice !== 0) {
             writer.uint32(33).double(message.TargetPrice);
         }
-        if (message.Status !== "") {
-            writer.uint32(42).string(message.Status);
+        if (message.Status !== 0) {
+            writer.uint32(40).int32(message.Status);
         }
         if (message.OrganizationID !== "") {
             writer.uint32(50).string(message.OrganizationID);
@@ -200,10 +200,10 @@ exports.AlertDetails = {
                     message.TargetPrice = reader.double();
                     continue;
                 case 5:
-                    if (tag !== 42) {
+                    if (tag !== 40) {
                         break;
                     }
-                    message.Status = reader.string();
+                    message.Status = reader.int32();
                     continue;
                 case 6:
                     if (tag !== 50) {
@@ -225,7 +225,7 @@ exports.AlertDetails = {
             UserID: isSet(object.UserID) ? globalThis.String(object.UserID) : "",
             AssetKey: isSet(object.AssetKey) ? globalThis.String(object.AssetKey) : "",
             TargetPrice: isSet(object.TargetPrice) ? globalThis.Number(object.TargetPrice) : 0,
-            Status: isSet(object.Status) ? globalThis.String(object.Status) : "",
+            Status: isSet(object.Status) ? alertStatusFromJSON(object.Status) : 0,
             OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
         };
     },
@@ -243,8 +243,8 @@ exports.AlertDetails = {
         if (message.TargetPrice !== 0) {
             obj.TargetPrice = message.TargetPrice;
         }
-        if (message.Status !== "") {
-            obj.Status = message.Status;
+        if (message.Status !== 0) {
+            obj.Status = alertStatusToJSON(message.Status);
         }
         if (message.OrganizationID !== "") {
             obj.OrganizationID = message.OrganizationID;
@@ -261,7 +261,7 @@ exports.AlertDetails = {
         message.UserID = (_b = object.UserID) !== null && _b !== void 0 ? _b : "";
         message.AssetKey = (_c = object.AssetKey) !== null && _c !== void 0 ? _c : "";
         message.TargetPrice = (_d = object.TargetPrice) !== null && _d !== void 0 ? _d : 0;
-        message.Status = (_e = object.Status) !== null && _e !== void 0 ? _e : "";
+        message.Status = (_e = object.Status) !== null && _e !== void 0 ? _e : 0;
         message.OrganizationID = (_f = object.OrganizationID) !== null && _f !== void 0 ? _f : "";
         return message;
     },

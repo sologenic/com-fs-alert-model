@@ -21,7 +21,7 @@ export interface AlertDetails {
     UserID: string;
     AssetKey: string;
     TargetPrice: number;
-    Status: string;
+    Status: AlertStatus;
     OrganizationID: string;
 }
 export interface AlertID {
@@ -49,7 +49,7 @@ export declare const Alert: {
             UserID?: string | undefined;
             AssetKey?: string | undefined;
             TargetPrice?: number | undefined;
-            Status?: string | undefined;
+            Status?: AlertStatus | undefined;
             OrganizationID?: string | undefined;
         } | undefined;
         MetaData?: {
@@ -69,14 +69,14 @@ export declare const Alert: {
             UserID?: string | undefined;
             AssetKey?: string | undefined;
             TargetPrice?: number | undefined;
-            Status?: string | undefined;
+            Status?: AlertStatus | undefined;
             OrganizationID?: string | undefined;
         } & {
             AlertID?: string | undefined;
             UserID?: string | undefined;
             AssetKey?: string | undefined;
             TargetPrice?: number | undefined;
-            Status?: string | undefined;
+            Status?: AlertStatus | undefined;
             OrganizationID?: string | undefined;
         } & { [K in Exclude<keyof I["Alert"], keyof AlertDetails>]: never; }) | undefined;
         MetaData?: ({
@@ -106,7 +106,7 @@ export declare const Alert: {
             UserID?: string | undefined;
             AssetKey?: string | undefined;
             TargetPrice?: number | undefined;
-            Status?: string | undefined;
+            Status?: AlertStatus | undefined;
             OrganizationID?: string | undefined;
         } | undefined;
         MetaData?: {
@@ -126,14 +126,14 @@ export declare const Alert: {
             UserID?: string | undefined;
             AssetKey?: string | undefined;
             TargetPrice?: number | undefined;
-            Status?: string | undefined;
+            Status?: AlertStatus | undefined;
             OrganizationID?: string | undefined;
         } & {
             AlertID?: string | undefined;
             UserID?: string | undefined;
             AssetKey?: string | undefined;
             TargetPrice?: number | undefined;
-            Status?: string | undefined;
+            Status?: AlertStatus | undefined;
             OrganizationID?: string | undefined;
         } & { [K_4 in Exclude<keyof I_1["Alert"], keyof AlertDetails>]: never; }) | undefined;
         MetaData?: ({
@@ -168,14 +168,14 @@ export declare const AlertDetails: {
         UserID?: string | undefined;
         AssetKey?: string | undefined;
         TargetPrice?: number | undefined;
-        Status?: string | undefined;
+        Status?: AlertStatus | undefined;
         OrganizationID?: string | undefined;
     } & {
         AlertID?: string | undefined;
         UserID?: string | undefined;
         AssetKey?: string | undefined;
         TargetPrice?: number | undefined;
-        Status?: string | undefined;
+        Status?: AlertStatus | undefined;
         OrganizationID?: string | undefined;
     } & { [K in Exclude<keyof I, keyof AlertDetails>]: never; }>(base?: I | undefined): AlertDetails;
     fromPartial<I_1 extends {
@@ -183,14 +183,14 @@ export declare const AlertDetails: {
         UserID?: string | undefined;
         AssetKey?: string | undefined;
         TargetPrice?: number | undefined;
-        Status?: string | undefined;
+        Status?: AlertStatus | undefined;
         OrganizationID?: string | undefined;
     } & {
         AlertID?: string | undefined;
         UserID?: string | undefined;
         AssetKey?: string | undefined;
         TargetPrice?: number | undefined;
-        Status?: string | undefined;
+        Status?: AlertStatus | undefined;
         OrganizationID?: string | undefined;
     } & { [K_1 in Exclude<keyof I_1, keyof AlertDetails>]: never; }>(object: I_1): AlertDetails;
 };
@@ -250,7 +250,7 @@ export declare const AlertList: {
                 UserID?: string | undefined;
                 AssetKey?: string | undefined;
                 TargetPrice?: number | undefined;
-                Status?: string | undefined;
+                Status?: AlertStatus | undefined;
                 OrganizationID?: string | undefined;
             } | undefined;
             MetaData?: {
@@ -274,7 +274,7 @@ export declare const AlertList: {
                 UserID?: string | undefined;
                 AssetKey?: string | undefined;
                 TargetPrice?: number | undefined;
-                Status?: string | undefined;
+                Status?: AlertStatus | undefined;
                 OrganizationID?: string | undefined;
             } | undefined;
             MetaData?: {
@@ -294,7 +294,7 @@ export declare const AlertList: {
                 UserID?: string | undefined;
                 AssetKey?: string | undefined;
                 TargetPrice?: number | undefined;
-                Status?: string | undefined;
+                Status?: AlertStatus | undefined;
                 OrganizationID?: string | undefined;
             } | undefined;
             MetaData?: {
@@ -314,14 +314,14 @@ export declare const AlertList: {
                 UserID?: string | undefined;
                 AssetKey?: string | undefined;
                 TargetPrice?: number | undefined;
-                Status?: string | undefined;
+                Status?: AlertStatus | undefined;
                 OrganizationID?: string | undefined;
             } & {
                 AlertID?: string | undefined;
                 UserID?: string | undefined;
                 AssetKey?: string | undefined;
                 TargetPrice?: number | undefined;
-                Status?: string | undefined;
+                Status?: AlertStatus | undefined;
                 OrganizationID?: string | undefined;
             } & { [K in Exclude<keyof I["Alerts"][number]["Alert"], keyof AlertDetails>]: never; }) | undefined;
             MetaData?: ({
@@ -350,7 +350,7 @@ export declare const AlertList: {
                 UserID?: string | undefined;
                 AssetKey?: string | undefined;
                 TargetPrice?: number | undefined;
-                Status?: string | undefined;
+                Status?: AlertStatus | undefined;
                 OrganizationID?: string | undefined;
             } | undefined;
             MetaData?: {
@@ -375,7 +375,7 @@ export declare const AlertList: {
                 UserID?: string | undefined;
                 AssetKey?: string | undefined;
                 TargetPrice?: number | undefined;
-                Status?: string | undefined;
+                Status?: AlertStatus | undefined;
                 OrganizationID?: string | undefined;
             } | undefined;
             MetaData?: {
@@ -399,7 +399,7 @@ export declare const AlertList: {
                 UserID?: string | undefined;
                 AssetKey?: string | undefined;
                 TargetPrice?: number | undefined;
-                Status?: string | undefined;
+                Status?: AlertStatus | undefined;
                 OrganizationID?: string | undefined;
             } | undefined;
             MetaData?: {
@@ -419,7 +419,7 @@ export declare const AlertList: {
                 UserID?: string | undefined;
                 AssetKey?: string | undefined;
                 TargetPrice?: number | undefined;
-                Status?: string | undefined;
+                Status?: AlertStatus | undefined;
                 OrganizationID?: string | undefined;
             } | undefined;
             MetaData?: {
@@ -439,14 +439,14 @@ export declare const AlertList: {
                 UserID?: string | undefined;
                 AssetKey?: string | undefined;
                 TargetPrice?: number | undefined;
-                Status?: string | undefined;
+                Status?: AlertStatus | undefined;
                 OrganizationID?: string | undefined;
             } & {
                 AlertID?: string | undefined;
                 UserID?: string | undefined;
                 AssetKey?: string | undefined;
                 TargetPrice?: number | undefined;
-                Status?: string | undefined;
+                Status?: AlertStatus | undefined;
                 OrganizationID?: string | undefined;
             } & { [K_6 in Exclude<keyof I_1["Alerts"][number]["Alert"], keyof AlertDetails>]: never; }) | undefined;
             MetaData?: ({
@@ -475,7 +475,7 @@ export declare const AlertList: {
                 UserID?: string | undefined;
                 AssetKey?: string | undefined;
                 TargetPrice?: number | undefined;
-                Status?: string | undefined;
+                Status?: AlertStatus | undefined;
                 OrganizationID?: string | undefined;
             } | undefined;
             MetaData?: {

@@ -72,7 +72,7 @@ export interface AlertDetails {
   UserID: string;
   AssetKey: string;
   TargetPrice: number;
-  Status: string;
+  Status: AlertStatus;
   OrganizationID: string;
 }
 
@@ -187,7 +187,7 @@ export const Alert = {
 };
 
 function createBaseAlertDetails(): AlertDetails {
-  return { AlertID: "", UserID: "", AssetKey: "", TargetPrice: 0, Status: "", OrganizationID: "" };
+  return { AlertID: "", UserID: "", AssetKey: "", TargetPrice: 0, Status: 0, OrganizationID: "" };
 }
 
 export const AlertDetails = {
@@ -204,8 +204,8 @@ export const AlertDetails = {
     if (message.TargetPrice !== 0) {
       writer.uint32(33).double(message.TargetPrice);
     }
-    if (message.Status !== "") {
-      writer.uint32(42).string(message.Status);
+    if (message.Status !== 0) {
+      writer.uint32(40).int32(message.Status);
     }
     if (message.OrganizationID !== "") {
       writer.uint32(50).string(message.OrganizationID);
@@ -249,11 +249,11 @@ export const AlertDetails = {
           message.TargetPrice = reader.double();
           continue;
         case 5:
-          if (tag !== 42) {
+          if (tag !== 40) {
             break;
           }
 
-          message.Status = reader.string();
+          message.Status = reader.int32() as any;
           continue;
         case 6:
           if (tag !== 50) {
@@ -277,7 +277,7 @@ export const AlertDetails = {
       UserID: isSet(object.UserID) ? globalThis.String(object.UserID) : "",
       AssetKey: isSet(object.AssetKey) ? globalThis.String(object.AssetKey) : "",
       TargetPrice: isSet(object.TargetPrice) ? globalThis.Number(object.TargetPrice) : 0,
-      Status: isSet(object.Status) ? globalThis.String(object.Status) : "",
+      Status: isSet(object.Status) ? alertStatusFromJSON(object.Status) : 0,
       OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
     };
   },
@@ -296,8 +296,8 @@ export const AlertDetails = {
     if (message.TargetPrice !== 0) {
       obj.TargetPrice = message.TargetPrice;
     }
-    if (message.Status !== "") {
-      obj.Status = message.Status;
+    if (message.Status !== 0) {
+      obj.Status = alertStatusToJSON(message.Status);
     }
     if (message.OrganizationID !== "") {
       obj.OrganizationID = message.OrganizationID;
@@ -314,7 +314,7 @@ export const AlertDetails = {
     message.UserID = object.UserID ?? "";
     message.AssetKey = object.AssetKey ?? "";
     message.TargetPrice = object.TargetPrice ?? 0;
-    message.Status = object.Status ?? "";
+    message.Status = object.Status ?? 0;
     message.OrganizationID = object.OrganizationID ?? "";
     return message;
   },

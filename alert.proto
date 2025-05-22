@@ -18,7 +18,7 @@ message AlertDetails {
     string UserID = 2;
     string AssetKey = 3;            
     double TargetPrice = 4;
-    string Status = 5;
+    AlertStatus Status = 5;
     string OrganizationID = 6;
 }
 
