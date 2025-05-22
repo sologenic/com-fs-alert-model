@@ -9,24 +9,23 @@ option go_package = "github.com/sologenic/com-fs-alert-model;alert";
 
 message Alert{
     AlertDetails Alert = 1;
-    metadata.Metadata Metadata = 2;
+    metadata.MetaData MetaData = 2;
     audit.Audit Audit = 3;
 }
 
 message AlertDetails{
-  string AlertID = 1;
-  string UserID = 2;
-  string Symbol = 3;                // e.g. "AAPL"
-  double TargetPrice = 4;           // e.g. 220.00
-  string Currency = 5;              // e.g. "USD"
-  TriggerDirection Direction = 6;   // e.g. "ABOVE" or "BELOW"         
-  string Status = 7;                // e.g. "ACTIVE", "TRIGGERED", "CANCELLED"
-  string OrganizationID = 8;
+    string AlertID = 1;
+    string UserID = 2;
+    string Symbol = 3;                // e.g. "AAPL"
+    double TargetPrice = 4;           // e.g. 220.00
+    string Currency = 5;              // e.g. "USD"
+    string Status = 6;                // e.g. "ACTIVE", "TRIGGERED", "CANCELLED"
+    string OrganizationID = 7;
 
 }
 
 message AlertID {
-  string Value = 1;
+    string Value = 1;
 }
 
 message AlertFilter {
@@ -37,18 +36,13 @@ message AlertFilter {
 }
 
 message AlertList {
-  repeated Alert Alerts = 1;
-}
-
-enum TriggerDirection {
-  ABOVE = 0;
-  BELOW = 1;
+    repeated Alert Alerts = 1;
 }
 
 enum AlertStatus {
     DO_NOT_USE = 0;
-  ACTIVE = 1;
-  TRIGGERED = 2;
-  CANCELLED = 3;
+    ACTIVE = 1;
+    TRIGGERED = 2;
+    CANCELLED = 3;
 }
 
