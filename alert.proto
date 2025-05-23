@@ -29,6 +29,12 @@ message AlertID {
     optional metadata.Network Network = 3; 
 }
 
+message AssetKey {
+    string AssetKey = 1;
+    string OrganizationID = 2; 
+    optional metadata.Network Network = 3; 
+}
+
 message AlertFilter {
     string OrganizationID = 1;
     optional metadata.Network Network = 3;

@@ -83,6 +83,12 @@ export interface AlertID {
   Network?: Network | undefined;
 }
 
+export interface AssetKey {
+  AssetKey: string;
+  OrganizationID: string;
+  Network?: Network | undefined;
+}
+
 export interface AlertFilter {
   OrganizationID: string;
   Network?: Network | undefined;
@@ -406,6 +412,95 @@ export const AlertID = {
   fromPartial<I extends Exact<DeepPartial<AlertID>, I>>(object: I): AlertID {
     const message = createBaseAlertID();
     message.Value = object.Value ?? "";
+    message.OrganizationID = object.OrganizationID ?? "";
+    message.Network = object.Network ?? undefined;
+    return message;
+  },
+};
+
+function createBaseAssetKey(): AssetKey {
+  return { AssetKey: "", OrganizationID: "", Network: undefined };
+}
+
+export const AssetKey = {
+  encode(message: AssetKey, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.AssetKey !== "") {
+      writer.uint32(10).string(message.AssetKey);
+    }
+    if (message.OrganizationID !== "") {
+      writer.uint32(18).string(message.OrganizationID);
+    }
+    if (message.Network !== undefined) {
+      writer.uint32(24).int32(message.Network);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): AssetKey {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAssetKey();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.AssetKey = reader.string();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.OrganizationID = reader.string();
+          continue;
+        case 3:
+          if (tag !== 24) {
+            break;
+          }
+
+          message.Network = reader.int32() as any;
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): AssetKey {
+    return {
+      AssetKey: isSet(object.AssetKey) ? globalThis.String(object.AssetKey) : "",
+      OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
+      Network: isSet(object.Network) ? networkFromJSON(object.Network) : undefined,
+    };
+  },
+
+  toJSON(message: AssetKey): unknown {
+    const obj: any = {};
+    if (message.AssetKey !== "") {
+      obj.AssetKey = message.AssetKey;
+    }
+    if (message.OrganizationID !== "") {
+      obj.OrganizationID = message.OrganizationID;
+    }
+    if (message.Network !== undefined) {
+      obj.Network = networkToJSON(message.Network);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<AssetKey>, I>>(base?: I): AssetKey {
+    return AssetKey.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<AssetKey>, I>>(object: I): AssetKey {
+    const message = createBaseAssetKey();
+    message.AssetKey = object.AssetKey ?? "";
     message.OrganizationID = object.OrganizationID ?? "";
     message.Network = object.Network ?? undefined;
     return message;

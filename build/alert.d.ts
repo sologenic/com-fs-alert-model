@@ -29,6 +29,11 @@ export interface AlertID {
     OrganizationID: string;
     Network?: Network | undefined;
 }
+export interface AssetKey {
+    AssetKey: string;
+    OrganizationID: string;
+    Network?: Network | undefined;
+}
 export interface AlertFilter {
     OrganizationID: string;
     Network?: Network | undefined;
@@ -219,6 +224,30 @@ export declare const AlertID: {
         OrganizationID?: string | undefined;
         Network?: Network | undefined;
     } & { [K_1 in Exclude<keyof I_1, keyof AlertID>]: never; }>(object: I_1): AlertID;
+};
+export declare const AssetKey: {
+    encode(message: AssetKey, writer?: _m0.Writer): _m0.Writer;
+    decode(input: _m0.Reader | Uint8Array, length?: number): AssetKey;
+    fromJSON(object: any): AssetKey;
+    toJSON(message: AssetKey): unknown;
+    create<I extends {
+        AssetKey?: string | undefined;
+        OrganizationID?: string | undefined;
+        Network?: Network | undefined;
+    } & {
+        AssetKey?: string | undefined;
+        OrganizationID?: string | undefined;
+        Network?: Network | undefined;
+    } & { [K in Exclude<keyof I, keyof AssetKey>]: never; }>(base?: I | undefined): AssetKey;
+    fromPartial<I_1 extends {
+        AssetKey?: string | undefined;
+        OrganizationID?: string | undefined;
+        Network?: Network | undefined;
+    } & {
+        AssetKey?: string | undefined;
+        OrganizationID?: string | undefined;
+        Network?: Network | undefined;
+    } & { [K_1 in Exclude<keyof I_1, keyof AssetKey>]: never; }>(object: I_1): AssetKey;
 };
 export declare const AlertFilter: {
     encode(message: AlertFilter, writer?: _m0.Writer): _m0.Writer;
