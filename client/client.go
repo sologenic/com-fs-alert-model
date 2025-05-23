@@ -10,17 +10,16 @@ import (
 const endpoint = "ALERT_STORE"
 
 var (
-	client     *grpcdef.AlertServiceClient
+	client     grpcdef.AlertServiceClient
 	grpcClient *grpcclient.GRPCClient
 )
 
 func initClient() {
 	grpcClient = grpcclient.InitClient(endpoint)
-	cl := grpcdef.NewAlertServiceClient(grpcClient.Conn)
-	client = &cl
+	client = grpcdef.NewAlertServiceClient(grpcClient.Conn)
 }
 
-func Client() *grpcdef.AlertServiceClient {
+func Client() grpcdef.AlertServiceClient {
 	if client == nil {
 		initClient()
 	}
