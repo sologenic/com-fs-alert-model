@@ -10,6 +10,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AlertList = exports.AlertFilter = exports.AlertID = exports.AlertDetails = exports.Alert = exports.alertStatusToJSON = exports.alertStatusFromJSON = exports.AlertStatus = exports.protobufPackage = void 0;
 /* eslint-disable */
+const long_1 = __importDefault(require("long"));
 const minimal_1 = __importDefault(require("protobufjs/minimal"));
 const audit_1 = require("./sologenic/com-fs-utils-lib/models/audit/audit");
 const metadata_1 = require("./sologenic/com-fs-utils-lib/models/metadata/metadata");
@@ -144,15 +145,15 @@ exports.Alert = {
     },
 };
 function createBaseAlertDetails() {
-    return { AlertID: "", UserID: "", AssetKey: "", TargetPrice: 0, Status: 0, OrganizationID: "" };
+    return { AlertID: 0, Account: "", AssetKey: "", TargetPrice: 0, Status: 0, OrganizationID: "" };
 }
 exports.AlertDetails = {
     encode(message, writer = minimal_1.default.Writer.create()) {
-        if (message.AlertID !== "") {
-            writer.uint32(10).string(message.AlertID);
+        if (message.AlertID !== 0) {
+            writer.uint32(8).int64(message.AlertID);
         }
-        if (message.UserID !== "") {
-            writer.uint32(18).string(message.UserID);
+        if (message.Account !== "") {
+            writer.uint32(18).string(message.Account);
         }
         if (message.AssetKey !== "") {
             writer.uint32(26).string(message.AssetKey);
@@ -176,16 +177,16 @@ exports.AlertDetails = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag !== 10) {
+                    if (tag !== 8) {
                         break;
                     }
-                    message.AlertID = reader.string();
+                    message.AlertID = longToNumber(reader.int64());
                     continue;
                 case 2:
                     if (tag !== 18) {
                         break;
                     }
-                    message.UserID = reader.string();
+                    message.Account = reader.string();
                     continue;
                 case 3:
                     if (tag !== 26) {
@@ -221,8 +222,8 @@ exports.AlertDetails = {
     },
     fromJSON(object) {
         return {
-            AlertID: isSet(object.AlertID) ? globalThis.String(object.AlertID) : "",
-            UserID: isSet(object.UserID) ? globalThis.String(object.UserID) : "",
+            AlertID: isSet(object.AlertID) ? globalThis.Number(object.AlertID) : 0,
+            Account: isSet(object.Account) ? globalThis.String(object.Account) : "",
             AssetKey: isSet(object.AssetKey) ? globalThis.String(object.AssetKey) : "",
             TargetPrice: isSet(object.TargetPrice) ? globalThis.Number(object.TargetPrice) : 0,
             Status: isSet(object.Status) ? alertStatusFromJSON(object.Status) : 0,
@@ -231,11 +232,11 @@ exports.AlertDetails = {
     },
     toJSON(message) {
         const obj = {};
-        if (message.AlertID !== "") {
-            obj.AlertID = message.AlertID;
+        if (message.AlertID !== 0) {
+            obj.AlertID = Math.round(message.AlertID);
         }
-        if (message.UserID !== "") {
-            obj.UserID = message.UserID;
+        if (message.Account !== "") {
+            obj.Account = message.Account;
         }
         if (message.AssetKey !== "") {
             obj.AssetKey = message.AssetKey;
@@ -257,8 +258,8 @@ exports.AlertDetails = {
     fromPartial(object) {
         var _a, _b, _c, _d, _e, _f;
         const message = createBaseAlertDetails();
-        message.AlertID = (_a = object.AlertID) !== null && _a !== void 0 ? _a : "";
-        message.UserID = (_b = object.UserID) !== null && _b !== void 0 ? _b : "";
+        message.AlertID = (_a = object.AlertID) !== null && _a !== void 0 ? _a : 0;
+        message.Account = (_b = object.Account) !== null && _b !== void 0 ? _b : "";
         message.AssetKey = (_c = object.AssetKey) !== null && _c !== void 0 ? _c : "";
         message.TargetPrice = (_d = object.TargetPrice) !== null && _d !== void 0 ? _d : 0;
         message.Status = (_e = object.Status) !== null && _e !== void 0 ? _e : 0;
@@ -524,6 +525,19 @@ exports.AlertList = {
         return message;
     },
 };
+function longToNumber(long) {
+    if (long.gt(globalThis.Number.MAX_SAFE_INTEGER)) {
+        throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
+    }
+    if (long.lt(globalThis.Number.MIN_SAFE_INTEGER)) {
+        throw new globalThis.Error("Value is smaller than Number.MIN_SAFE_INTEGER");
+    }
+    return long.toNumber();
+}
+if (minimal_1.default.util.Long !== long_1.default) {
+    minimal_1.default.util.Long = long_1.default;
+    minimal_1.default.configure();
+}
 function isSet(value) {
     return value !== null && value !== undefined;
 }

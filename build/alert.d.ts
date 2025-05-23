@@ -17,8 +17,8 @@ export interface Alert {
     Audit: Audit | undefined;
 }
 export interface AlertDetails {
-    AlertID: string;
-    UserID: string;
+    AlertID: number;
+    Account: string;
     AssetKey: string;
     TargetPrice: number;
     Status: AlertStatus;
@@ -47,8 +47,8 @@ export declare const Alert: {
     toJSON(message: Alert): unknown;
     create<I extends {
         Alert?: {
-            AlertID?: string | undefined;
-            UserID?: string | undefined;
+            AlertID?: number | undefined;
+            Account?: string | undefined;
             AssetKey?: string | undefined;
             TargetPrice?: number | undefined;
             Status?: AlertStatus | undefined;
@@ -67,15 +67,15 @@ export declare const Alert: {
         } | undefined;
     } & {
         Alert?: ({
-            AlertID?: string | undefined;
-            UserID?: string | undefined;
+            AlertID?: number | undefined;
+            Account?: string | undefined;
             AssetKey?: string | undefined;
             TargetPrice?: number | undefined;
             Status?: AlertStatus | undefined;
             OrganizationID?: string | undefined;
         } & {
-            AlertID?: string | undefined;
-            UserID?: string | undefined;
+            AlertID?: number | undefined;
+            Account?: string | undefined;
             AssetKey?: string | undefined;
             TargetPrice?: number | undefined;
             Status?: AlertStatus | undefined;
@@ -104,8 +104,8 @@ export declare const Alert: {
     } & { [K_3 in Exclude<keyof I, keyof Alert>]: never; }>(base?: I | undefined): Alert;
     fromPartial<I_1 extends {
         Alert?: {
-            AlertID?: string | undefined;
-            UserID?: string | undefined;
+            AlertID?: number | undefined;
+            Account?: string | undefined;
             AssetKey?: string | undefined;
             TargetPrice?: number | undefined;
             Status?: AlertStatus | undefined;
@@ -124,15 +124,15 @@ export declare const Alert: {
         } | undefined;
     } & {
         Alert?: ({
-            AlertID?: string | undefined;
-            UserID?: string | undefined;
+            AlertID?: number | undefined;
+            Account?: string | undefined;
             AssetKey?: string | undefined;
             TargetPrice?: number | undefined;
             Status?: AlertStatus | undefined;
             OrganizationID?: string | undefined;
         } & {
-            AlertID?: string | undefined;
-            UserID?: string | undefined;
+            AlertID?: number | undefined;
+            Account?: string | undefined;
             AssetKey?: string | undefined;
             TargetPrice?: number | undefined;
             Status?: AlertStatus | undefined;
@@ -166,30 +166,30 @@ export declare const AlertDetails: {
     fromJSON(object: any): AlertDetails;
     toJSON(message: AlertDetails): unknown;
     create<I extends {
-        AlertID?: string | undefined;
-        UserID?: string | undefined;
+        AlertID?: number | undefined;
+        Account?: string | undefined;
         AssetKey?: string | undefined;
         TargetPrice?: number | undefined;
         Status?: AlertStatus | undefined;
         OrganizationID?: string | undefined;
     } & {
-        AlertID?: string | undefined;
-        UserID?: string | undefined;
+        AlertID?: number | undefined;
+        Account?: string | undefined;
         AssetKey?: string | undefined;
         TargetPrice?: number | undefined;
         Status?: AlertStatus | undefined;
         OrganizationID?: string | undefined;
     } & { [K in Exclude<keyof I, keyof AlertDetails>]: never; }>(base?: I | undefined): AlertDetails;
     fromPartial<I_1 extends {
-        AlertID?: string | undefined;
-        UserID?: string | undefined;
+        AlertID?: number | undefined;
+        Account?: string | undefined;
         AssetKey?: string | undefined;
         TargetPrice?: number | undefined;
         Status?: AlertStatus | undefined;
         OrganizationID?: string | undefined;
     } & {
-        AlertID?: string | undefined;
-        UserID?: string | undefined;
+        AlertID?: number | undefined;
+        Account?: string | undefined;
         AssetKey?: string | undefined;
         TargetPrice?: number | undefined;
         Status?: AlertStatus | undefined;
@@ -256,8 +256,8 @@ export declare const AlertList: {
     create<I extends {
         Alerts?: {
             Alert?: {
-                AlertID?: string | undefined;
-                UserID?: string | undefined;
+                AlertID?: number | undefined;
+                Account?: string | undefined;
                 AssetKey?: string | undefined;
                 TargetPrice?: number | undefined;
                 Status?: AlertStatus | undefined;
@@ -280,8 +280,8 @@ export declare const AlertList: {
     } & {
         Alerts?: ({
             Alert?: {
-                AlertID?: string | undefined;
-                UserID?: string | undefined;
+                AlertID?: number | undefined;
+                Account?: string | undefined;
                 AssetKey?: string | undefined;
                 TargetPrice?: number | undefined;
                 Status?: AlertStatus | undefined;
@@ -300,8 +300,8 @@ export declare const AlertList: {
             } | undefined;
         }[] & ({
             Alert?: {
-                AlertID?: string | undefined;
-                UserID?: string | undefined;
+                AlertID?: number | undefined;
+                Account?: string | undefined;
                 AssetKey?: string | undefined;
                 TargetPrice?: number | undefined;
                 Status?: AlertStatus | undefined;
@@ -320,15 +320,15 @@ export declare const AlertList: {
             } | undefined;
         } & {
             Alert?: ({
-                AlertID?: string | undefined;
-                UserID?: string | undefined;
+                AlertID?: number | undefined;
+                Account?: string | undefined;
                 AssetKey?: string | undefined;
                 TargetPrice?: number | undefined;
                 Status?: AlertStatus | undefined;
                 OrganizationID?: string | undefined;
             } & {
-                AlertID?: string | undefined;
-                UserID?: string | undefined;
+                AlertID?: number | undefined;
+                Account?: string | undefined;
                 AssetKey?: string | undefined;
                 TargetPrice?: number | undefined;
                 Status?: AlertStatus | undefined;
@@ -356,8 +356,8 @@ export declare const AlertList: {
             } & { [K_2 in Exclude<keyof I["Alerts"][number]["Audit"], keyof Audit>]: never; }) | undefined;
         } & { [K_3 in Exclude<keyof I["Alerts"][number], keyof Alert>]: never; })[] & { [K_4 in Exclude<keyof I["Alerts"], keyof {
             Alert?: {
-                AlertID?: string | undefined;
-                UserID?: string | undefined;
+                AlertID?: number | undefined;
+                Account?: string | undefined;
                 AssetKey?: string | undefined;
                 TargetPrice?: number | undefined;
                 Status?: AlertStatus | undefined;
@@ -381,8 +381,8 @@ export declare const AlertList: {
     fromPartial<I_1 extends {
         Alerts?: {
             Alert?: {
-                AlertID?: string | undefined;
-                UserID?: string | undefined;
+                AlertID?: number | undefined;
+                Account?: string | undefined;
                 AssetKey?: string | undefined;
                 TargetPrice?: number | undefined;
                 Status?: AlertStatus | undefined;
@@ -405,8 +405,8 @@ export declare const AlertList: {
     } & {
         Alerts?: ({
             Alert?: {
-                AlertID?: string | undefined;
-                UserID?: string | undefined;
+                AlertID?: number | undefined;
+                Account?: string | undefined;
                 AssetKey?: string | undefined;
                 TargetPrice?: number | undefined;
                 Status?: AlertStatus | undefined;
@@ -425,8 +425,8 @@ export declare const AlertList: {
             } | undefined;
         }[] & ({
             Alert?: {
-                AlertID?: string | undefined;
-                UserID?: string | undefined;
+                AlertID?: number | undefined;
+                Account?: string | undefined;
                 AssetKey?: string | undefined;
                 TargetPrice?: number | undefined;
                 Status?: AlertStatus | undefined;
@@ -445,15 +445,15 @@ export declare const AlertList: {
             } | undefined;
         } & {
             Alert?: ({
-                AlertID?: string | undefined;
-                UserID?: string | undefined;
+                AlertID?: number | undefined;
+                Account?: string | undefined;
                 AssetKey?: string | undefined;
                 TargetPrice?: number | undefined;
                 Status?: AlertStatus | undefined;
                 OrganizationID?: string | undefined;
             } & {
-                AlertID?: string | undefined;
-                UserID?: string | undefined;
+                AlertID?: number | undefined;
+                Account?: string | undefined;
                 AssetKey?: string | undefined;
                 TargetPrice?: number | undefined;
                 Status?: AlertStatus | undefined;
@@ -481,8 +481,8 @@ export declare const AlertList: {
             } & { [K_8 in Exclude<keyof I_1["Alerts"][number]["Audit"], keyof Audit>]: never; }) | undefined;
         } & { [K_9 in Exclude<keyof I_1["Alerts"][number], keyof Alert>]: never; })[] & { [K_10 in Exclude<keyof I_1["Alerts"], keyof {
             Alert?: {
-                AlertID?: string | undefined;
-                UserID?: string | undefined;
+                AlertID?: number | undefined;
+                Account?: string | undefined;
                 AssetKey?: string | undefined;
                 TargetPrice?: number | undefined;
                 Status?: AlertStatus | undefined;

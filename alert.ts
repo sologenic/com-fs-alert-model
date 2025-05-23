@@ -5,6 +5,7 @@
 // source: alert.proto
 
 /* eslint-disable */
+import Long from "long";
 import _m0 from "protobufjs/minimal";
 import { Audit } from "./sologenic/com-fs-utils-lib/models/audit/audit";
 import {
@@ -68,8 +69,8 @@ export interface Alert {
 }
 
 export interface AlertDetails {
-  AlertID: string;
-  UserID: string;
+  AlertID: number;
+  Account: string;
   AssetKey: string;
   TargetPrice: number;
   Status: AlertStatus;
@@ -189,16 +190,16 @@ export const Alert = {
 };
 
 function createBaseAlertDetails(): AlertDetails {
-  return { AlertID: "", UserID: "", AssetKey: "", TargetPrice: 0, Status: 0, OrganizationID: "" };
+  return { AlertID: 0, Account: "", AssetKey: "", TargetPrice: 0, Status: 0, OrganizationID: "" };
 }
 
 export const AlertDetails = {
   encode(message: AlertDetails, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.AlertID !== "") {
-      writer.uint32(10).string(message.AlertID);
+    if (message.AlertID !== 0) {
+      writer.uint32(8).int64(message.AlertID);
     }
-    if (message.UserID !== "") {
-      writer.uint32(18).string(message.UserID);
+    if (message.Account !== "") {
+      writer.uint32(18).string(message.Account);
     }
     if (message.AssetKey !== "") {
       writer.uint32(26).string(message.AssetKey);
@@ -223,18 +224,18 @@ export const AlertDetails = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag !== 10) {
+          if (tag !== 8) {
             break;
           }
 
-          message.AlertID = reader.string();
+          message.AlertID = longToNumber(reader.int64() as Long);
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.UserID = reader.string();
+          message.Account = reader.string();
           continue;
         case 3:
           if (tag !== 26) {
@@ -275,8 +276,8 @@ export const AlertDetails = {
 
   fromJSON(object: any): AlertDetails {
     return {
-      AlertID: isSet(object.AlertID) ? globalThis.String(object.AlertID) : "",
-      UserID: isSet(object.UserID) ? globalThis.String(object.UserID) : "",
+      AlertID: isSet(object.AlertID) ? globalThis.Number(object.AlertID) : 0,
+      Account: isSet(object.Account) ? globalThis.String(object.Account) : "",
       AssetKey: isSet(object.AssetKey) ? globalThis.String(object.AssetKey) : "",
       TargetPrice: isSet(object.TargetPrice) ? globalThis.Number(object.TargetPrice) : 0,
       Status: isSet(object.Status) ? alertStatusFromJSON(object.Status) : 0,
@@ -286,11 +287,11 @@ export const AlertDetails = {
 
   toJSON(message: AlertDetails): unknown {
     const obj: any = {};
-    if (message.AlertID !== "") {
-      obj.AlertID = message.AlertID;
+    if (message.AlertID !== 0) {
+      obj.AlertID = Math.round(message.AlertID);
     }
-    if (message.UserID !== "") {
-      obj.UserID = message.UserID;
+    if (message.Account !== "") {
+      obj.Account = message.Account;
     }
     if (message.AssetKey !== "") {
       obj.AssetKey = message.AssetKey;
@@ -312,8 +313,8 @@ export const AlertDetails = {
   },
   fromPartial<I extends Exact<DeepPartial<AlertDetails>, I>>(object: I): AlertDetails {
     const message = createBaseAlertDetails();
-    message.AlertID = object.AlertID ?? "";
-    message.UserID = object.UserID ?? "";
+    message.AlertID = object.AlertID ?? 0;
+    message.Account = object.Account ?? "";
     message.AssetKey = object.AssetKey ?? "";
     message.TargetPrice = object.TargetPrice ?? 0;
     message.Status = object.Status ?? 0;
@@ -615,6 +616,21 @@ export type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+
+function longToNumber(long: Long): number {
+  if (long.gt(globalThis.Number.MAX_SAFE_INTEGER)) {
+    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
+  }
+  if (long.lt(globalThis.Number.MIN_SAFE_INTEGER)) {
+    throw new globalThis.Error("Value is smaller than Number.MIN_SAFE_INTEGER");
+  }
+  return long.toNumber();
+}
+
+if (_m0.util.Long !== Long) {
+  _m0.util.Long = Long as any;
+  _m0.configure();
+}
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;
