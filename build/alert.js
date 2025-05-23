@@ -267,12 +267,18 @@ exports.AlertDetails = {
     },
 };
 function createBaseAlertID() {
-    return { Value: "" };
+    return { Value: "", OrganizationID: "", Network: 0 };
 }
 exports.AlertID = {
     encode(message, writer = minimal_1.default.Writer.create()) {
         if (message.Value !== "") {
             writer.uint32(10).string(message.Value);
+        }
+        if (message.OrganizationID !== "") {
+            writer.uint32(18).string(message.OrganizationID);
+        }
+        if (message.Network !== 0) {
+            writer.uint32(24).int32(message.Network);
         }
         return writer;
     },
@@ -289,6 +295,18 @@ exports.AlertID = {
                     }
                     message.Value = reader.string();
                     continue;
+                case 2:
+                    if (tag !== 18) {
+                        break;
+                    }
+                    message.OrganizationID = reader.string();
+                    continue;
+                case 3:
+                    if (tag !== 24) {
+                        break;
+                    }
+                    message.Network = reader.int32();
+                    continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
                 break;
@@ -298,12 +316,22 @@ exports.AlertID = {
         return message;
     },
     fromJSON(object) {
-        return { Value: isSet(object.Value) ? globalThis.String(object.Value) : "" };
+        return {
+            Value: isSet(object.Value) ? globalThis.String(object.Value) : "",
+            OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
+            Network: isSet(object.Network) ? (0, metadata_1.networkFromJSON)(object.Network) : 0,
+        };
     },
     toJSON(message) {
         const obj = {};
         if (message.Value !== "") {
             obj.Value = message.Value;
+        }
+        if (message.OrganizationID !== "") {
+            obj.OrganizationID = message.OrganizationID;
+        }
+        if (message.Network !== 0) {
+            obj.Network = (0, metadata_1.networkToJSON)(message.Network);
         }
         return obj;
     },
@@ -311,9 +339,11 @@ exports.AlertID = {
         return exports.AlertID.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-        var _a;
+        var _a, _b, _c;
         const message = createBaseAlertID();
         message.Value = (_a = object.Value) !== null && _a !== void 0 ? _a : "";
+        message.OrganizationID = (_b = object.OrganizationID) !== null && _b !== void 0 ? _b : "";
+        message.Network = (_c = object.Network) !== null && _c !== void 0 ? _c : 0;
         return message;
     },
 };

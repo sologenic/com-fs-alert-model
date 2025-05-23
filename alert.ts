@@ -78,6 +78,8 @@ export interface AlertDetails {
 
 export interface AlertID {
   Value: string;
+  OrganizationID: string;
+  Network: Network;
 }
 
 export interface AlertFilter {
@@ -321,13 +323,19 @@ export const AlertDetails = {
 };
 
 function createBaseAlertID(): AlertID {
-  return { Value: "" };
+  return { Value: "", OrganizationID: "", Network: 0 };
 }
 
 export const AlertID = {
   encode(message: AlertID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.Value !== "") {
       writer.uint32(10).string(message.Value);
+    }
+    if (message.OrganizationID !== "") {
+      writer.uint32(18).string(message.OrganizationID);
+    }
+    if (message.Network !== 0) {
+      writer.uint32(24).int32(message.Network);
     }
     return writer;
   },
@@ -346,6 +354,20 @@ export const AlertID = {
 
           message.Value = reader.string();
           continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.OrganizationID = reader.string();
+          continue;
+        case 3:
+          if (tag !== 24) {
+            break;
+          }
+
+          message.Network = reader.int32() as any;
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -356,13 +378,23 @@ export const AlertID = {
   },
 
   fromJSON(object: any): AlertID {
-    return { Value: isSet(object.Value) ? globalThis.String(object.Value) : "" };
+    return {
+      Value: isSet(object.Value) ? globalThis.String(object.Value) : "",
+      OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
+      Network: isSet(object.Network) ? networkFromJSON(object.Network) : 0,
+    };
   },
 
   toJSON(message: AlertID): unknown {
     const obj: any = {};
     if (message.Value !== "") {
       obj.Value = message.Value;
+    }
+    if (message.OrganizationID !== "") {
+      obj.OrganizationID = message.OrganizationID;
+    }
+    if (message.Network !== 0) {
+      obj.Network = networkToJSON(message.Network);
     }
     return obj;
   },
@@ -373,6 +405,8 @@ export const AlertID = {
   fromPartial<I extends Exact<DeepPartial<AlertID>, I>>(object: I): AlertID {
     const message = createBaseAlertID();
     message.Value = object.Value ?? "";
+    message.OrganizationID = object.OrganizationID ?? "";
+    message.Network = object.Network ?? 0;
     return message;
   },
 };

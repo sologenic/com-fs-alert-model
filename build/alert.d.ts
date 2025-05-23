@@ -26,6 +26,8 @@ export interface AlertDetails {
 }
 export interface AlertID {
     Value: string;
+    OrganizationID: string;
+    Network: Network;
 }
 export interface AlertFilter {
     OrganizationID: string;
@@ -201,14 +203,22 @@ export declare const AlertID: {
     toJSON(message: AlertID): unknown;
     create<I extends {
         Value?: string | undefined;
+        OrganizationID?: string | undefined;
+        Network?: Network | undefined;
     } & {
         Value?: string | undefined;
-    } & { [K in Exclude<keyof I, "Value">]: never; }>(base?: I | undefined): AlertID;
+        OrganizationID?: string | undefined;
+        Network?: Network | undefined;
+    } & { [K in Exclude<keyof I, keyof AlertID>]: never; }>(base?: I | undefined): AlertID;
     fromPartial<I_1 extends {
         Value?: string | undefined;
+        OrganizationID?: string | undefined;
+        Network?: Network | undefined;
     } & {
         Value?: string | undefined;
-    } & { [K_1 in Exclude<keyof I_1, "Value">]: never; }>(object: I_1): AlertID;
+        OrganizationID?: string | undefined;
+        Network?: Network | undefined;
+    } & { [K_1 in Exclude<keyof I_1, keyof AlertID>]: never; }>(object: I_1): AlertID;
 };
 export declare const AlertFilter: {
     encode(message: AlertFilter, writer?: _m0.Writer): _m0.Writer;
