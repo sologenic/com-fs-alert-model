@@ -267,7 +267,7 @@ exports.AlertDetails = {
     },
 };
 function createBaseAlertID() {
-    return { Value: "", OrganizationID: "", Network: 0 };
+    return { Value: "", OrganizationID: "", Network: undefined };
 }
 exports.AlertID = {
     encode(message, writer = minimal_1.default.Writer.create()) {
@@ -277,7 +277,7 @@ exports.AlertID = {
         if (message.OrganizationID !== "") {
             writer.uint32(18).string(message.OrganizationID);
         }
-        if (message.Network !== 0) {
+        if (message.Network !== undefined) {
             writer.uint32(24).int32(message.Network);
         }
         return writer;
@@ -319,7 +319,7 @@ exports.AlertID = {
         return {
             Value: isSet(object.Value) ? globalThis.String(object.Value) : "",
             OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
-            Network: isSet(object.Network) ? (0, metadata_1.networkFromJSON)(object.Network) : 0,
+            Network: isSet(object.Network) ? (0, metadata_1.networkFromJSON)(object.Network) : undefined,
         };
     },
     toJSON(message) {
@@ -330,7 +330,7 @@ exports.AlertID = {
         if (message.OrganizationID !== "") {
             obj.OrganizationID = message.OrganizationID;
         }
-        if (message.Network !== 0) {
+        if (message.Network !== undefined) {
             obj.Network = (0, metadata_1.networkToJSON)(message.Network);
         }
         return obj;
@@ -343,7 +343,7 @@ exports.AlertID = {
         const message = createBaseAlertID();
         message.Value = (_a = object.Value) !== null && _a !== void 0 ? _a : "";
         message.OrganizationID = (_b = object.OrganizationID) !== null && _b !== void 0 ? _b : "";
-        message.Network = (_c = object.Network) !== null && _c !== void 0 ? _c : 0;
+        message.Network = (_c = object.Network) !== null && _c !== void 0 ? _c : undefined;
         return message;
     },
 };

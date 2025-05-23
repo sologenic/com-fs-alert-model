@@ -79,7 +79,7 @@ export interface AlertDetails {
 export interface AlertID {
   Value: string;
   OrganizationID: string;
-  Network: Network;
+  Network?: Network | undefined;
 }
 
 export interface AlertFilter {
@@ -323,7 +323,7 @@ export const AlertDetails = {
 };
 
 function createBaseAlertID(): AlertID {
-  return { Value: "", OrganizationID: "", Network: 0 };
+  return { Value: "", OrganizationID: "", Network: undefined };
 }
 
 export const AlertID = {
@@ -334,7 +334,7 @@ export const AlertID = {
     if (message.OrganizationID !== "") {
       writer.uint32(18).string(message.OrganizationID);
     }
-    if (message.Network !== 0) {
+    if (message.Network !== undefined) {
       writer.uint32(24).int32(message.Network);
     }
     return writer;
@@ -381,7 +381,7 @@ export const AlertID = {
     return {
       Value: isSet(object.Value) ? globalThis.String(object.Value) : "",
       OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
-      Network: isSet(object.Network) ? networkFromJSON(object.Network) : 0,
+      Network: isSet(object.Network) ? networkFromJSON(object.Network) : undefined,
     };
   },
 
@@ -393,7 +393,7 @@ export const AlertID = {
     if (message.OrganizationID !== "") {
       obj.OrganizationID = message.OrganizationID;
     }
-    if (message.Network !== 0) {
+    if (message.Network !== undefined) {
       obj.Network = networkToJSON(message.Network);
     }
     return obj;
@@ -406,7 +406,7 @@ export const AlertID = {
     const message = createBaseAlertID();
     message.Value = object.Value ?? "";
     message.OrganizationID = object.OrganizationID ?? "";
-    message.Network = object.Network ?? 0;
+    message.Network = object.Network ?? undefined;
     return message;
   },
 };

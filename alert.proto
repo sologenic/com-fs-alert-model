@@ -26,7 +26,7 @@ message AlertDetails {
 message AlertID {
     string Value = 1;
     string OrganizationID = 2; 
-    metadata.Network Network = 3; 
+    optional metadata.Network Network = 3; 
 }
 
 message AlertFilter {

@@ -27,7 +27,7 @@ export interface AlertDetails {
 export interface AlertID {
     Value: string;
     OrganizationID: string;
-    Network: Network;
+    Network?: Network | undefined;
 }
 export interface AlertFilter {
     OrganizationID: string;
