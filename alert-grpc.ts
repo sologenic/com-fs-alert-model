@@ -17,7 +17,7 @@ import {
   type ServiceError,
   type UntypedServiceImplementation,
 } from "@grpc/grpc-js";
-import { Alert, AlertFilter, AlertList } from "./alert";
+import { Alert, AlertFilter, AlertList, AssetKey } from "./alert";
 import { Empty } from "./google/protobuf/Empty";
 
 export const protobufPackage = "alert";
@@ -37,8 +37,8 @@ export const AlertServiceService = {
     path: "/alert.AlertService/Delete",
     requestStream: false,
     responseStream: false,
-    requestSerialize: (value: Alert) => Buffer.from(Alert.encode(value).finish()),
-    requestDeserialize: (value: Buffer) => Alert.decode(value),
+    requestSerialize: (value: AssetKey) => Buffer.from(AssetKey.encode(value).finish()),
+    requestDeserialize: (value: Buffer) => AssetKey.decode(value),
     responseSerialize: (value: Empty) => Buffer.from(Empty.encode(value).finish()),
     responseDeserialize: (value: Buffer) => Empty.decode(value),
   },
@@ -64,7 +64,7 @@ export const AlertServiceService = {
 
 export interface AlertServiceServer extends UntypedServiceImplementation {
   upsert: handleUnaryCall<Alert, Empty>;
-  delete: handleUnaryCall<Alert, Empty>;
+  delete: handleUnaryCall<AssetKey, Empty>;
   get: handleUnaryCall<Alert, Alert>;
   list: handleUnaryCall<AlertFilter, AlertList>;
 }
@@ -82,14 +82,14 @@ export interface AlertServiceClient extends Client {
     options: Partial<CallOptions>,
     callback: (error: ServiceError | null, response: Empty) => void,
   ): ClientUnaryCall;
-  delete(request: Alert, callback: (error: ServiceError | null, response: Empty) => void): ClientUnaryCall;
+  delete(request: AssetKey, callback: (error: ServiceError | null, response: Empty) => void): ClientUnaryCall;
   delete(
-    request: Alert,
+    request: AssetKey,
     metadata: Metadata,
     callback: (error: ServiceError | null, response: Empty) => void,
   ): ClientUnaryCall;
   delete(
-    request: Alert,
+    request: AssetKey,
     metadata: Metadata,
     options: Partial<CallOptions>,
     callback: (error: ServiceError | null, response: Empty) => void,

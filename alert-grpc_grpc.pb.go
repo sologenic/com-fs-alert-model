@@ -31,7 +31,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AlertServiceClient interface {
 	Upsert(ctx context.Context, in *Alert, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	Delete(ctx context.Context, in *Alert, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	Delete(ctx context.Context, in *AssetKey, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	Get(ctx context.Context, in *Alert, opts ...grpc.CallOption) (*Alert, error)
 	List(ctx context.Context, in *AlertFilter, opts ...grpc.CallOption) (*AlertList, error)
 }
@@ -54,7 +54,7 @@ func (c *alertServiceClient) Upsert(ctx context.Context, in *Alert, opts ...grpc
 	return out, nil
 }
 
-func (c *alertServiceClient) Delete(ctx context.Context, in *Alert, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *alertServiceClient) Delete(ctx context.Context, in *AssetKey, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, AlertService_Delete_FullMethodName, in, out, cOpts...)
@@ -89,7 +89,7 @@ func (c *alertServiceClient) List(ctx context.Context, in *AlertFilter, opts ...
 // for forward compatibility.
 type AlertServiceServer interface {
 	Upsert(context.Context, *Alert) (*emptypb.Empty, error)
-	Delete(context.Context, *Alert) (*emptypb.Empty, error)
+	Delete(context.Context, *AssetKey) (*emptypb.Empty, error)
 	Get(context.Context, *Alert) (*Alert, error)
 	List(context.Context, *AlertFilter) (*AlertList, error)
 }
@@ -104,7 +104,7 @@ type UnimplementedAlertServiceServer struct{}
 func (UnimplementedAlertServiceServer) Upsert(context.Context, *Alert) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Upsert not implemented")
 }
-func (UnimplementedAlertServiceServer) Delete(context.Context, *Alert) (*emptypb.Empty, error) {
+func (UnimplementedAlertServiceServer) Delete(context.Context, *AssetKey) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
 func (UnimplementedAlertServiceServer) Get(context.Context, *Alert) (*Alert, error) {
@@ -152,7 +152,7 @@ func _AlertService_Upsert_Handler(srv interface{}, ctx context.Context, dec func
 }
 
 func _AlertService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Alert)
+	in := new(AssetKey)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -164,7 +164,7 @@ func _AlertService_Delete_Handler(srv interface{}, ctx context.Context, dec func
 		FullMethod: AlertService_Delete_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AlertServiceServer).Delete(ctx, req.(*Alert))
+		return srv.(AlertServiceServer).Delete(ctx, req.(*AssetKey))
 	}
 	return interceptor(ctx, in, info, handler)
 }

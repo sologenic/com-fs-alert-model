@@ -1,7 +1,7 @@
 /// <reference types="node" />
 /// <reference types="node" />
 import { type CallOptions, ChannelCredentials, Client, type ClientOptions, type ClientUnaryCall, type handleUnaryCall, Metadata, type ServiceError, type UntypedServiceImplementation } from "@grpc/grpc-js";
-import { Alert, AlertFilter, AlertList } from "./alert";
+import { Alert, AlertFilter, AlertList, AssetKey } from "./alert";
 import { Empty } from "./google/protobuf/Empty";
 export declare const protobufPackage = "alert";
 export type AlertServiceService = typeof AlertServiceService;
@@ -19,8 +19,8 @@ export declare const AlertServiceService: {
         readonly path: "/alert.AlertService/Delete";
         readonly requestStream: false;
         readonly responseStream: false;
-        readonly requestSerialize: (value: Alert) => Buffer;
-        readonly requestDeserialize: (value: Buffer) => Alert;
+        readonly requestSerialize: (value: AssetKey) => Buffer;
+        readonly requestDeserialize: (value: Buffer) => AssetKey;
         readonly responseSerialize: (value: Empty) => Buffer;
         readonly responseDeserialize: (value: Buffer) => Empty;
     };
@@ -45,7 +45,7 @@ export declare const AlertServiceService: {
 };
 export interface AlertServiceServer extends UntypedServiceImplementation {
     upsert: handleUnaryCall<Alert, Empty>;
-    delete: handleUnaryCall<Alert, Empty>;
+    delete: handleUnaryCall<AssetKey, Empty>;
     get: handleUnaryCall<Alert, Alert>;
     list: handleUnaryCall<AlertFilter, AlertList>;
 }
@@ -53,9 +53,9 @@ export interface AlertServiceClient extends Client {
     upsert(request: Alert, callback: (error: ServiceError | null, response: Empty) => void): ClientUnaryCall;
     upsert(request: Alert, metadata: Metadata, callback: (error: ServiceError | null, response: Empty) => void): ClientUnaryCall;
     upsert(request: Alert, metadata: Metadata, options: Partial<CallOptions>, callback: (error: ServiceError | null, response: Empty) => void): ClientUnaryCall;
-    delete(request: Alert, callback: (error: ServiceError | null, response: Empty) => void): ClientUnaryCall;
-    delete(request: Alert, metadata: Metadata, callback: (error: ServiceError | null, response: Empty) => void): ClientUnaryCall;
-    delete(request: Alert, metadata: Metadata, options: Partial<CallOptions>, callback: (error: ServiceError | null, response: Empty) => void): ClientUnaryCall;
+    delete(request: AssetKey, callback: (error: ServiceError | null, response: Empty) => void): ClientUnaryCall;
+    delete(request: AssetKey, metadata: Metadata, callback: (error: ServiceError | null, response: Empty) => void): ClientUnaryCall;
+    delete(request: AssetKey, metadata: Metadata, options: Partial<CallOptions>, callback: (error: ServiceError | null, response: Empty) => void): ClientUnaryCall;
     get(request: Alert, callback: (error: ServiceError | null, response: Alert) => void): ClientUnaryCall;
     get(request: Alert, metadata: Metadata, callback: (error: ServiceError | null, response: Alert) => void): ClientUnaryCall;
     get(request: Alert, metadata: Metadata, options: Partial<CallOptions>, callback: (error: ServiceError | null, response: Alert) => void): ClientUnaryCall;
