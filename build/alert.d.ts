@@ -24,11 +24,6 @@ export interface AlertDetails {
     Status: AlertStatus;
     OrganizationID: string;
 }
-export interface AlertID {
-    Value: string;
-    OrganizationID: string;
-    Network?: Network | undefined;
-}
 export interface AssetKey {
     AssetKey: string;
     OrganizationID: string;
@@ -200,30 +195,6 @@ export declare const AlertDetails: {
         Status?: AlertStatus | undefined;
         OrganizationID?: string | undefined;
     } & { [K_1 in Exclude<keyof I_1, keyof AlertDetails>]: never; }>(object: I_1): AlertDetails;
-};
-export declare const AlertID: {
-    encode(message: AlertID, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): AlertID;
-    fromJSON(object: any): AlertID;
-    toJSON(message: AlertID): unknown;
-    create<I extends {
-        Value?: string | undefined;
-        OrganizationID?: string | undefined;
-        Network?: Network | undefined;
-    } & {
-        Value?: string | undefined;
-        OrganizationID?: string | undefined;
-        Network?: Network | undefined;
-    } & { [K in Exclude<keyof I, keyof AlertID>]: never; }>(base?: I | undefined): AlertID;
-    fromPartial<I_1 extends {
-        Value?: string | undefined;
-        OrganizationID?: string | undefined;
-        Network?: Network | undefined;
-    } & {
-        Value?: string | undefined;
-        OrganizationID?: string | undefined;
-        Network?: Network | undefined;
-    } & { [K_1 in Exclude<keyof I_1, keyof AlertID>]: never; }>(object: I_1): AlertID;
 };
 export declare const AssetKey: {
     encode(message: AssetKey, writer?: _m0.Writer): _m0.Writer;

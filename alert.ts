@@ -77,12 +77,6 @@ export interface AlertDetails {
   OrganizationID: string;
 }
 
-export interface AlertID {
-  Value: string;
-  OrganizationID: string;
-  Network?: Network | undefined;
-}
-
 export interface AssetKey {
   AssetKey: string;
   OrganizationID: string;
@@ -325,95 +319,6 @@ export const AlertDetails = {
     message.TargetPrice = object.TargetPrice ?? 0;
     message.Status = object.Status ?? 0;
     message.OrganizationID = object.OrganizationID ?? "";
-    return message;
-  },
-};
-
-function createBaseAlertID(): AlertID {
-  return { Value: "", OrganizationID: "", Network: undefined };
-}
-
-export const AlertID = {
-  encode(message: AlertID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.Value !== "") {
-      writer.uint32(10).string(message.Value);
-    }
-    if (message.OrganizationID !== "") {
-      writer.uint32(18).string(message.OrganizationID);
-    }
-    if (message.Network !== undefined) {
-      writer.uint32(24).int32(message.Network);
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): AlertID {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseAlertID();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.Value = reader.string();
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.OrganizationID = reader.string();
-          continue;
-        case 3:
-          if (tag !== 24) {
-            break;
-          }
-
-          message.Network = reader.int32() as any;
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): AlertID {
-    return {
-      Value: isSet(object.Value) ? globalThis.String(object.Value) : "",
-      OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
-      Network: isSet(object.Network) ? networkFromJSON(object.Network) : undefined,
-    };
-  },
-
-  toJSON(message: AlertID): unknown {
-    const obj: any = {};
-    if (message.Value !== "") {
-      obj.Value = message.Value;
-    }
-    if (message.OrganizationID !== "") {
-      obj.OrganizationID = message.OrganizationID;
-    }
-    if (message.Network !== undefined) {
-      obj.Network = networkToJSON(message.Network);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<AlertID>, I>>(base?: I): AlertID {
-    return AlertID.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<AlertID>, I>>(object: I): AlertID {
-    const message = createBaseAlertID();
-    message.Value = object.Value ?? "";
-    message.OrganizationID = object.OrganizationID ?? "";
-    message.Network = object.Network ?? undefined;
     return message;
   },
 };

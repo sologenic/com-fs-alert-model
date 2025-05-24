@@ -23,12 +23,6 @@ message AlertDetails {
 }
 
 
-message AlertID {
-    string Value = 1;
-    string OrganizationID = 2; 
-    optional metadata.Network Network = 3; 
-}
-
 message AssetKey {
     string AssetKey = 1;
     string OrganizationID = 2; 

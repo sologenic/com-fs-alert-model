@@ -8,7 +8,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AlertList = exports.AlertFilter = exports.AssetKey = exports.AlertID = exports.AlertDetails = exports.Alert = exports.alertStatusToJSON = exports.alertStatusFromJSON = exports.AlertStatus = exports.protobufPackage = void 0;
+exports.AlertList = exports.AlertFilter = exports.AssetKey = exports.AlertDetails = exports.Alert = exports.alertStatusToJSON = exports.alertStatusFromJSON = exports.AlertStatus = exports.protobufPackage = void 0;
 /* eslint-disable */
 const long_1 = __importDefault(require("long"));
 const minimal_1 = __importDefault(require("protobufjs/minimal"));
@@ -264,87 +264,6 @@ exports.AlertDetails = {
         message.TargetPrice = (_d = object.TargetPrice) !== null && _d !== void 0 ? _d : 0;
         message.Status = (_e = object.Status) !== null && _e !== void 0 ? _e : 0;
         message.OrganizationID = (_f = object.OrganizationID) !== null && _f !== void 0 ? _f : "";
-        return message;
-    },
-};
-function createBaseAlertID() {
-    return { Value: "", OrganizationID: "", Network: undefined };
-}
-exports.AlertID = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
-        if (message.Value !== "") {
-            writer.uint32(10).string(message.Value);
-        }
-        if (message.OrganizationID !== "") {
-            writer.uint32(18).string(message.OrganizationID);
-        }
-        if (message.Network !== undefined) {
-            writer.uint32(24).int32(message.Network);
-        }
-        return writer;
-    },
-    decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
-        let end = length === undefined ? reader.len : reader.pos + length;
-        const message = createBaseAlertID();
-        while (reader.pos < end) {
-            const tag = reader.uint32();
-            switch (tag >>> 3) {
-                case 1:
-                    if (tag !== 10) {
-                        break;
-                    }
-                    message.Value = reader.string();
-                    continue;
-                case 2:
-                    if (tag !== 18) {
-                        break;
-                    }
-                    message.OrganizationID = reader.string();
-                    continue;
-                case 3:
-                    if (tag !== 24) {
-                        break;
-                    }
-                    message.Network = reader.int32();
-                    continue;
-            }
-            if ((tag & 7) === 4 || tag === 0) {
-                break;
-            }
-            reader.skipType(tag & 7);
-        }
-        return message;
-    },
-    fromJSON(object) {
-        return {
-            Value: isSet(object.Value) ? globalThis.String(object.Value) : "",
-            OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
-            Network: isSet(object.Network) ? (0, metadata_1.networkFromJSON)(object.Network) : undefined,
-        };
-    },
-    toJSON(message) {
-        const obj = {};
-        if (message.Value !== "") {
-            obj.Value = message.Value;
-        }
-        if (message.OrganizationID !== "") {
-            obj.OrganizationID = message.OrganizationID;
-        }
-        if (message.Network !== undefined) {
-            obj.Network = (0, metadata_1.networkToJSON)(message.Network);
-        }
-        return obj;
-    },
-    create(base) {
-        return exports.AlertID.fromPartial(base !== null && base !== void 0 ? base : {});
-    },
-    fromPartial(object) {
-        var _a, _b, _c;
-        const message = createBaseAlertID();
-        message.Value = (_a = object.Value) !== null && _a !== void 0 ? _a : "";
-        message.OrganizationID = (_b = object.OrganizationID) !== null && _b !== void 0 ? _b : "";
-        message.Network = (_c = object.Network) !== null && _c !== void 0 ? _c : undefined;
         return message;
     },
 };

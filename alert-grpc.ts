@@ -17,7 +17,7 @@ import {
   type ServiceError,
   type UntypedServiceImplementation,
 } from "@grpc/grpc-js";
-import { Alert, AlertFilter, AlertID, AlertList } from "./alert";
+import { Alert, AlertFilter, AlertList } from "./alert";
 import { Empty } from "./google/protobuf/Empty";
 
 export const protobufPackage = "alert";
@@ -37,8 +37,8 @@ export const AlertServiceService = {
     path: "/alert.AlertService/Delete",
     requestStream: false,
     responseStream: false,
-    requestSerialize: (value: AlertID) => Buffer.from(AlertID.encode(value).finish()),
-    requestDeserialize: (value: Buffer) => AlertID.decode(value),
+    requestSerialize: (value: Alert) => Buffer.from(Alert.encode(value).finish()),
+    requestDeserialize: (value: Buffer) => Alert.decode(value),
     responseSerialize: (value: Empty) => Buffer.from(Empty.encode(value).finish()),
     responseDeserialize: (value: Buffer) => Empty.decode(value),
   },
@@ -46,8 +46,8 @@ export const AlertServiceService = {
     path: "/alert.AlertService/Get",
     requestStream: false,
     responseStream: false,
-    requestSerialize: (value: AlertID) => Buffer.from(AlertID.encode(value).finish()),
-    requestDeserialize: (value: Buffer) => AlertID.decode(value),
+    requestSerialize: (value: Alert) => Buffer.from(Alert.encode(value).finish()),
+    requestDeserialize: (value: Buffer) => Alert.decode(value),
     responseSerialize: (value: Alert) => Buffer.from(Alert.encode(value).finish()),
     responseDeserialize: (value: Buffer) => Alert.decode(value),
   },
@@ -64,8 +64,8 @@ export const AlertServiceService = {
 
 export interface AlertServiceServer extends UntypedServiceImplementation {
   upsert: handleUnaryCall<Alert, Empty>;
-  delete: handleUnaryCall<AlertID, Empty>;
-  get: handleUnaryCall<AlertID, Alert>;
+  delete: handleUnaryCall<Alert, Empty>;
+  get: handleUnaryCall<Alert, Alert>;
   list: handleUnaryCall<AlertFilter, AlertList>;
 }
 
@@ -82,26 +82,26 @@ export interface AlertServiceClient extends Client {
     options: Partial<CallOptions>,
     callback: (error: ServiceError | null, response: Empty) => void,
   ): ClientUnaryCall;
-  delete(request: AlertID, callback: (error: ServiceError | null, response: Empty) => void): ClientUnaryCall;
+  delete(request: Alert, callback: (error: ServiceError | null, response: Empty) => void): ClientUnaryCall;
   delete(
-    request: AlertID,
+    request: Alert,
     metadata: Metadata,
     callback: (error: ServiceError | null, response: Empty) => void,
   ): ClientUnaryCall;
   delete(
-    request: AlertID,
+    request: Alert,
     metadata: Metadata,
     options: Partial<CallOptions>,
     callback: (error: ServiceError | null, response: Empty) => void,
   ): ClientUnaryCall;
-  get(request: AlertID, callback: (error: ServiceError | null, response: Alert) => void): ClientUnaryCall;
+  get(request: Alert, callback: (error: ServiceError | null, response: Alert) => void): ClientUnaryCall;
   get(
-    request: AlertID,
+    request: Alert,
     metadata: Metadata,
     callback: (error: ServiceError | null, response: Alert) => void,
   ): ClientUnaryCall;
   get(
-    request: AlertID,
+    request: Alert,
     metadata: Metadata,
     options: Partial<CallOptions>,
     callback: (error: ServiceError | null, response: Alert) => void,
