@@ -25,6 +25,7 @@ export interface AlertDetails {
     OrganizationID: string;
 }
 export interface AssetKey {
+    Account: string;
     AssetKey: string;
     OrganizationID: string;
     Network?: Network | undefined;
@@ -202,19 +203,23 @@ export declare const AssetKey: {
     fromJSON(object: any): AssetKey;
     toJSON(message: AssetKey): unknown;
     create<I extends {
+        Account?: string | undefined;
         AssetKey?: string | undefined;
         OrganizationID?: string | undefined;
         Network?: Network | undefined;
     } & {
+        Account?: string | undefined;
         AssetKey?: string | undefined;
         OrganizationID?: string | undefined;
         Network?: Network | undefined;
     } & { [K in Exclude<keyof I, keyof AssetKey>]: never; }>(base?: I | undefined): AssetKey;
     fromPartial<I_1 extends {
+        Account?: string | undefined;
         AssetKey?: string | undefined;
         OrganizationID?: string | undefined;
         Network?: Network | undefined;
     } & {
+        Account?: string | undefined;
         AssetKey?: string | undefined;
         OrganizationID?: string | undefined;
         Network?: Network | undefined;

@@ -268,18 +268,21 @@ exports.AlertDetails = {
     },
 };
 function createBaseAssetKey() {
-    return { AssetKey: "", OrganizationID: "", Network: undefined };
+    return { Account: "", AssetKey: "", OrganizationID: "", Network: undefined };
 }
 exports.AssetKey = {
     encode(message, writer = minimal_1.default.Writer.create()) {
+        if (message.Account !== "") {
+            writer.uint32(10).string(message.Account);
+        }
         if (message.AssetKey !== "") {
-            writer.uint32(10).string(message.AssetKey);
+            writer.uint32(18).string(message.AssetKey);
         }
         if (message.OrganizationID !== "") {
-            writer.uint32(18).string(message.OrganizationID);
+            writer.uint32(26).string(message.OrganizationID);
         }
         if (message.Network !== undefined) {
-            writer.uint32(24).int32(message.Network);
+            writer.uint32(32).int32(message.Network);
         }
         return writer;
     },
@@ -294,16 +297,22 @@ exports.AssetKey = {
                     if (tag !== 10) {
                         break;
                     }
-                    message.AssetKey = reader.string();
+                    message.Account = reader.string();
                     continue;
                 case 2:
                     if (tag !== 18) {
                         break;
                     }
-                    message.OrganizationID = reader.string();
+                    message.AssetKey = reader.string();
                     continue;
                 case 3:
-                    if (tag !== 24) {
+                    if (tag !== 26) {
+                        break;
+                    }
+                    message.OrganizationID = reader.string();
+                    continue;
+                case 4:
+                    if (tag !== 32) {
                         break;
                     }
                     message.Network = reader.int32();
@@ -318,6 +327,7 @@ exports.AssetKey = {
     },
     fromJSON(object) {
         return {
+            Account: isSet(object.Account) ? globalThis.String(object.Account) : "",
             AssetKey: isSet(object.AssetKey) ? globalThis.String(object.AssetKey) : "",
             OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
             Network: isSet(object.Network) ? (0, metadata_1.networkFromJSON)(object.Network) : undefined,
@@ -325,6 +335,9 @@ exports.AssetKey = {
     },
     toJSON(message) {
         const obj = {};
+        if (message.Account !== "") {
+            obj.Account = message.Account;
+        }
         if (message.AssetKey !== "") {
             obj.AssetKey = message.AssetKey;
         }
@@ -340,11 +353,12 @@ exports.AssetKey = {
         return exports.AssetKey.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-        var _a, _b, _c;
+        var _a, _b, _c, _d;
         const message = createBaseAssetKey();
-        message.AssetKey = (_a = object.AssetKey) !== null && _a !== void 0 ? _a : "";
-        message.OrganizationID = (_b = object.OrganizationID) !== null && _b !== void 0 ? _b : "";
-        message.Network = (_c = object.Network) !== null && _c !== void 0 ? _c : undefined;
+        message.Account = (_a = object.Account) !== null && _a !== void 0 ? _a : "";
+        message.AssetKey = (_b = object.AssetKey) !== null && _b !== void 0 ? _b : "";
+        message.OrganizationID = (_c = object.OrganizationID) !== null && _c !== void 0 ? _c : "";
+        message.Network = (_d = object.Network) !== null && _d !== void 0 ? _d : undefined;
         return message;
     },
 };

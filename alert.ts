@@ -78,6 +78,7 @@ export interface AlertDetails {
 }
 
 export interface AssetKey {
+  Account: string;
   AssetKey: string;
   OrganizationID: string;
   Network?: Network | undefined;
@@ -324,19 +325,22 @@ export const AlertDetails = {
 };
 
 function createBaseAssetKey(): AssetKey {
-  return { AssetKey: "", OrganizationID: "", Network: undefined };
+  return { Account: "", AssetKey: "", OrganizationID: "", Network: undefined };
 }
 
 export const AssetKey = {
   encode(message: AssetKey, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.Account !== "") {
+      writer.uint32(10).string(message.Account);
+    }
     if (message.AssetKey !== "") {
-      writer.uint32(10).string(message.AssetKey);
+      writer.uint32(18).string(message.AssetKey);
     }
     if (message.OrganizationID !== "") {
-      writer.uint32(18).string(message.OrganizationID);
+      writer.uint32(26).string(message.OrganizationID);
     }
     if (message.Network !== undefined) {
-      writer.uint32(24).int32(message.Network);
+      writer.uint32(32).int32(message.Network);
     }
     return writer;
   },
@@ -353,17 +357,24 @@ export const AssetKey = {
             break;
           }
 
-          message.AssetKey = reader.string();
+          message.Account = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.OrganizationID = reader.string();
+          message.AssetKey = reader.string();
           continue;
         case 3:
-          if (tag !== 24) {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.OrganizationID = reader.string();
+          continue;
+        case 4:
+          if (tag !== 32) {
             break;
           }
 
@@ -380,6 +391,7 @@ export const AssetKey = {
 
   fromJSON(object: any): AssetKey {
     return {
+      Account: isSet(object.Account) ? globalThis.String(object.Account) : "",
       AssetKey: isSet(object.AssetKey) ? globalThis.String(object.AssetKey) : "",
       OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
       Network: isSet(object.Network) ? networkFromJSON(object.Network) : undefined,
@@ -388,6 +400,9 @@ export const AssetKey = {
 
   toJSON(message: AssetKey): unknown {
     const obj: any = {};
+    if (message.Account !== "") {
+      obj.Account = message.Account;
+    }
     if (message.AssetKey !== "") {
       obj.AssetKey = message.AssetKey;
     }
@@ -405,6 +420,7 @@ export const AssetKey = {
   },
   fromPartial<I extends Exact<DeepPartial<AssetKey>, I>>(object: I): AssetKey {
     const message = createBaseAssetKey();
+    message.Account = object.Account ?? "";
     message.AssetKey = object.AssetKey ?? "";
     message.OrganizationID = object.OrganizationID ?? "";
     message.Network = object.Network ?? undefined;
