@@ -46,8 +46,8 @@ export const AlertServiceService = {
     path: "/alert.AlertService/Get",
     requestStream: false,
     responseStream: false,
-    requestSerialize: (value: Alert) => Buffer.from(Alert.encode(value).finish()),
-    requestDeserialize: (value: Buffer) => Alert.decode(value),
+    requestSerialize: (value: AssetKey) => Buffer.from(AssetKey.encode(value).finish()),
+    requestDeserialize: (value: Buffer) => AssetKey.decode(value),
     responseSerialize: (value: Alert) => Buffer.from(Alert.encode(value).finish()),
     responseDeserialize: (value: Buffer) => Alert.decode(value),
   },
@@ -65,7 +65,7 @@ export const AlertServiceService = {
 export interface AlertServiceServer extends UntypedServiceImplementation {
   upsert: handleUnaryCall<Alert, Empty>;
   delete: handleUnaryCall<AssetKey, Empty>;
-  get: handleUnaryCall<Alert, Alert>;
+  get: handleUnaryCall<AssetKey, Alert>;
   list: handleUnaryCall<AlertFilter, AlertList>;
 }
 
@@ -94,14 +94,14 @@ export interface AlertServiceClient extends Client {
     options: Partial<CallOptions>,
     callback: (error: ServiceError | null, response: Empty) => void,
   ): ClientUnaryCall;
-  get(request: Alert, callback: (error: ServiceError | null, response: Alert) => void): ClientUnaryCall;
+  get(request: AssetKey, callback: (error: ServiceError | null, response: Alert) => void): ClientUnaryCall;
   get(
-    request: Alert,
+    request: AssetKey,
     metadata: Metadata,
     callback: (error: ServiceError | null, response: Alert) => void,
   ): ClientUnaryCall;
   get(
-    request: Alert,
+    request: AssetKey,
     metadata: Metadata,
     options: Partial<CallOptions>,
     callback: (error: ServiceError | null, response: Alert) => void,

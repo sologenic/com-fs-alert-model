@@ -28,8 +28,8 @@ export declare const AlertServiceService: {
         readonly path: "/alert.AlertService/Get";
         readonly requestStream: false;
         readonly responseStream: false;
-        readonly requestSerialize: (value: Alert) => Buffer;
-        readonly requestDeserialize: (value: Buffer) => Alert;
+        readonly requestSerialize: (value: AssetKey) => Buffer;
+        readonly requestDeserialize: (value: Buffer) => AssetKey;
         readonly responseSerialize: (value: Alert) => Buffer;
         readonly responseDeserialize: (value: Buffer) => Alert;
     };
@@ -46,7 +46,7 @@ export declare const AlertServiceService: {
 export interface AlertServiceServer extends UntypedServiceImplementation {
     upsert: handleUnaryCall<Alert, Empty>;
     delete: handleUnaryCall<AssetKey, Empty>;
-    get: handleUnaryCall<Alert, Alert>;
+    get: handleUnaryCall<AssetKey, Alert>;
     list: handleUnaryCall<AlertFilter, AlertList>;
 }
 export interface AlertServiceClient extends Client {
@@ -56,9 +56,9 @@ export interface AlertServiceClient extends Client {
     delete(request: AssetKey, callback: (error: ServiceError | null, response: Empty) => void): ClientUnaryCall;
     delete(request: AssetKey, metadata: Metadata, callback: (error: ServiceError | null, response: Empty) => void): ClientUnaryCall;
     delete(request: AssetKey, metadata: Metadata, options: Partial<CallOptions>, callback: (error: ServiceError | null, response: Empty) => void): ClientUnaryCall;
-    get(request: Alert, callback: (error: ServiceError | null, response: Alert) => void): ClientUnaryCall;
-    get(request: Alert, metadata: Metadata, callback: (error: ServiceError | null, response: Alert) => void): ClientUnaryCall;
-    get(request: Alert, metadata: Metadata, options: Partial<CallOptions>, callback: (error: ServiceError | null, response: Alert) => void): ClientUnaryCall;
+    get(request: AssetKey, callback: (error: ServiceError | null, response: Alert) => void): ClientUnaryCall;
+    get(request: AssetKey, metadata: Metadata, callback: (error: ServiceError | null, response: Alert) => void): ClientUnaryCall;
+    get(request: AssetKey, metadata: Metadata, options: Partial<CallOptions>, callback: (error: ServiceError | null, response: Alert) => void): ClientUnaryCall;
     list(request: AlertFilter, callback: (error: ServiceError | null, response: AlertList) => void): ClientUnaryCall;
     list(request: AlertFilter, metadata: Metadata, callback: (error: ServiceError | null, response: AlertList) => void): ClientUnaryCall;
     list(request: AlertFilter, metadata: Metadata, options: Partial<CallOptions>, callback: (error: ServiceError | null, response: AlertList) => void): ClientUnaryCall;

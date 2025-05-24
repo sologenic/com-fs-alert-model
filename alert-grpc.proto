@@ -10,6 +10,6 @@ option go_package = "github.com/sologenic/com-fs-alert-model;alert";
 service AlertService {
     rpc Upsert(Alert) returns (google.protobuf.Empty) {}
     rpc Delete(AssetKey) returns (google.protobuf.Empty) {}
-    rpc Get(Alert) returns (Alert) {}
+    rpc Get(AssetKey) returns (Alert) {}
     rpc List(AlertFilter) returns (AlertList) {}
 }
