@@ -12,7 +12,7 @@ message Alert{
     metadata.MetaData MetaData = 2;
     audit.Audit Audit = 3;
 }
-
+                                    
 message AlertDetails {
     int64 AlertID = 1;
     string Account = 2;
@@ -35,12 +35,6 @@ message AlertFilter {
     optional metadata.Network Network = 3;
     optional int32 Offset = 4;
     optional int32 Limit = 5;
-}
-
-message AlertList {
-    repeated Alert Alerts = 1;
-    optional int32 Offset = 2;
-    optional int32 Limit = 3; 
 }
 
 enum AlertStatus {

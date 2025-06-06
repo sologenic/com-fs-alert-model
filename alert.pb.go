@@ -355,66 +355,6 @@ func (x *AlertFilter) GetLimit() int32 {
 	return 0
 }
 
-type AlertList struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Alerts        []*Alert               `protobuf:"bytes,1,rep,name=Alerts,proto3" json:"Alerts,omitempty"`
-	Offset        *int32                 `protobuf:"varint,2,opt,name=Offset,proto3,oneof" json:"Offset,omitempty"`
-	Limit         *int32                 `protobuf:"varint,3,opt,name=Limit,proto3,oneof" json:"Limit,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *AlertList) Reset() {
-	*x = AlertList{}
-	mi := &file_alert_proto_msgTypes[4]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *AlertList) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*AlertList) ProtoMessage() {}
-
-func (x *AlertList) ProtoReflect() protoreflect.Message {
-	mi := &file_alert_proto_msgTypes[4]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use AlertList.ProtoReflect.Descriptor instead.
-func (*AlertList) Descriptor() ([]byte, []int) {
-	return file_alert_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *AlertList) GetAlerts() []*Alert {
-	if x != nil {
-		return x.Alerts
-	}
-	return nil
-}
-
-func (x *AlertList) GetOffset() int32 {
-	if x != nil && x.Offset != nil {
-		return *x.Offset
-	}
-	return 0
-}
-
-func (x *AlertList) GetLimit() int32 {
-	if x != nil && x.Limit != nil {
-		return *x.Limit
-	}
-	return 0
-}
-
 var File_alert_proto protoreflect.FileDescriptor
 
 var file_alert_proto_rawDesc = string([]byte{
@@ -471,14 +411,6 @@ var file_alert_proto_rawDesc = string([]byte{
 	0x01, 0x28, 0x05, 0x48, 0x02, 0x52, 0x05, 0x4c, 0x69, 0x6d, 0x69, 0x74, 0x88, 0x01, 0x01, 0x42,
 	0x0a, 0x0a, 0x08, 0x5f, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x42, 0x09, 0x0a, 0x07, 0x5f,
 	0x4f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x42, 0x08, 0x0a, 0x06, 0x5f, 0x4c, 0x69, 0x6d, 0x69, 0x74,
-	0x22, 0x7e, 0x0a, 0x09, 0x41, 0x6c, 0x65, 0x72, 0x74, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x24, 0x0a,
-	0x06, 0x41, 0x6c, 0x65, 0x72, 0x74, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x0c, 0x2e,
-	0x61, 0x6c, 0x65, 0x72, 0x74, 0x2e, 0x41, 0x6c, 0x65, 0x72, 0x74, 0x52, 0x06, 0x41, 0x6c, 0x65,
-	0x72, 0x74, 0x73, 0x12, 0x1b, 0x0a, 0x06, 0x4f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x18, 0x02, 0x20,
-	0x01, 0x28, 0x05, 0x48, 0x00, 0x52, 0x06, 0x4f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x88, 0x01, 0x01,
-	0x12, 0x19, 0x0a, 0x05, 0x4c, 0x69, 0x6d, 0x69, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x05, 0x48,
-	0x01, 0x52, 0x05, 0x4c, 0x69, 0x6d, 0x69, 0x74, 0x88, 0x01, 0x01, 0x42, 0x09, 0x0a, 0x07, 0x5f,
-	0x4f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x42, 0x08, 0x0a, 0x06, 0x5f, 0x4c, 0x69, 0x6d, 0x69, 0x74,
 	0x2a, 0x47, 0x0a, 0x0b, 0x41, 0x6c, 0x65, 0x72, 0x74, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12,
 	0x0e, 0x0a, 0x0a, 0x44, 0x4f, 0x5f, 0x4e, 0x4f, 0x54, 0x5f, 0x55, 0x53, 0x45, 0x10, 0x00, 0x12,
 	0x0a, 0x0a, 0x06, 0x41, 0x43, 0x54, 0x49, 0x56, 0x45, 0x10, 0x01, 0x12, 0x0d, 0x0a, 0x09, 0x54,
@@ -503,31 +435,29 @@ func file_alert_proto_rawDescGZIP() []byte {
 }
 
 var file_alert_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_alert_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_alert_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_alert_proto_goTypes = []any{
 	(AlertStatus)(0),          // 0: alert.AlertStatus
 	(*Alert)(nil),             // 1: alert.Alert
 	(*AlertDetails)(nil),      // 2: alert.AlertDetails
 	(*AssetKey)(nil),          // 3: alert.AssetKey
 	(*AlertFilter)(nil),       // 4: alert.AlertFilter
-	(*AlertList)(nil),         // 5: alert.AlertList
-	(*metadata.MetaData)(nil), // 6: metadata.MetaData
-	(*audit.Audit)(nil),       // 7: audit.Audit
-	(metadata.Network)(0),     // 8: metadata.Network
+	(*metadata.MetaData)(nil), // 5: metadata.MetaData
+	(*audit.Audit)(nil),       // 6: audit.Audit
+	(metadata.Network)(0),     // 7: metadata.Network
 }
 var file_alert_proto_depIdxs = []int32{
 	2, // 0: alert.Alert.Alert:type_name -> alert.AlertDetails
-	6, // 1: alert.Alert.MetaData:type_name -> metadata.MetaData
-	7, // 2: alert.Alert.Audit:type_name -> audit.Audit
+	5, // 1: alert.Alert.MetaData:type_name -> metadata.MetaData
+	6, // 2: alert.Alert.Audit:type_name -> audit.Audit
 	0, // 3: alert.AlertDetails.Status:type_name -> alert.AlertStatus
-	8, // 4: alert.AssetKey.Network:type_name -> metadata.Network
-	8, // 5: alert.AlertFilter.Network:type_name -> metadata.Network
-	1, // 6: alert.AlertList.Alerts:type_name -> alert.Alert
-	7, // [7:7] is the sub-list for method output_type
-	7, // [7:7] is the sub-list for method input_type
-	7, // [7:7] is the sub-list for extension type_name
-	7, // [7:7] is the sub-list for extension extendee
-	0, // [0:7] is the sub-list for field type_name
+	7, // 4: alert.AssetKey.Network:type_name -> metadata.Network
+	7, // 5: alert.AlertFilter.Network:type_name -> metadata.Network
+	6, // [6:6] is the sub-list for method output_type
+	6, // [6:6] is the sub-list for method input_type
+	6, // [6:6] is the sub-list for extension type_name
+	6, // [6:6] is the sub-list for extension extendee
+	0, // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_alert_proto_init() }
@@ -537,14 +467,13 @@ func file_alert_proto_init() {
 	}
 	file_alert_proto_msgTypes[2].OneofWrappers = []any{}
 	file_alert_proto_msgTypes[3].OneofWrappers = []any{}
-	file_alert_proto_msgTypes[4].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_alert_proto_rawDesc), len(file_alert_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   5,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

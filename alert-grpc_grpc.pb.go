@@ -23,7 +23,6 @@ const (
 	AlertService_Upsert_FullMethodName = "/alert.AlertService/Upsert"
 	AlertService_Delete_FullMethodName = "/alert.AlertService/Delete"
 	AlertService_Get_FullMethodName    = "/alert.AlertService/Get"
-	AlertService_List_FullMethodName   = "/alert.AlertService/List"
 )
 
 // AlertServiceClient is the client API for AlertService service.
@@ -33,7 +32,6 @@ type AlertServiceClient interface {
 	Upsert(ctx context.Context, in *Alert, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	Delete(ctx context.Context, in *AssetKey, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	Get(ctx context.Context, in *AssetKey, opts ...grpc.CallOption) (*Alert, error)
-	List(ctx context.Context, in *AlertFilter, opts ...grpc.CallOption) (*AlertList, error)
 }
 
 type alertServiceClient struct {
@@ -74,16 +72,6 @@ func (c *alertServiceClient) Get(ctx context.Context, in *AssetKey, opts ...grpc
 	return out, nil
 }
 
-func (c *alertServiceClient) List(ctx context.Context, in *AlertFilter, opts ...grpc.CallOption) (*AlertList, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AlertList)
-	err := c.cc.Invoke(ctx, AlertService_List_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // AlertServiceServer is the server API for AlertService service.
 // All implementations should embed UnimplementedAlertServiceServer
 // for forward compatibility.
@@ -91,7 +79,6 @@ type AlertServiceServer interface {
 	Upsert(context.Context, *Alert) (*emptypb.Empty, error)
 	Delete(context.Context, *AssetKey) (*emptypb.Empty, error)
 	Get(context.Context, *AssetKey) (*Alert, error)
-	List(context.Context, *AlertFilter) (*AlertList, error)
 }
 
 // UnimplementedAlertServiceServer should be embedded to have
@@ -109,9 +96,6 @@ func (UnimplementedAlertServiceServer) Delete(context.Context, *AssetKey) (*empt
 }
 func (UnimplementedAlertServiceServer) Get(context.Context, *AssetKey) (*Alert, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
-}
-func (UnimplementedAlertServiceServer) List(context.Context, *AlertFilter) (*AlertList, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
 }
 func (UnimplementedAlertServiceServer) testEmbeddedByValue() {}
 
@@ -187,24 +171,6 @@ func _AlertService_Get_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AlertService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AlertFilter)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AlertServiceServer).List(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: AlertService_List_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AlertServiceServer).List(ctx, req.(*AlertFilter))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // AlertService_ServiceDesc is the grpc.ServiceDesc for AlertService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -223,10 +189,6 @@ var AlertService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Get",
 			Handler:    _AlertService_Get_Handler,
-		},
-		{
-			MethodName: "List",
-			Handler:    _AlertService_List_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
