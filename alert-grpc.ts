@@ -17,7 +17,7 @@ import {
   type ServiceError,
   type UntypedServiceImplementation,
 } from "@grpc/grpc-js";
-import { Alert, AlertFilter, AlertList, AssetKey } from "./alert";
+import { Alert, AssetKey } from "./alert";
 import { Empty } from "./google/protobuf/Empty";
 
 export const protobufPackage = "alert";
@@ -51,22 +51,12 @@ export const AlertServiceService = {
     responseSerialize: (value: Alert) => Buffer.from(Alert.encode(value).finish()),
     responseDeserialize: (value: Buffer) => Alert.decode(value),
   },
-  list: {
-    path: "/alert.AlertService/List",
-    requestStream: false,
-    responseStream: false,
-    requestSerialize: (value: AlertFilter) => Buffer.from(AlertFilter.encode(value).finish()),
-    requestDeserialize: (value: Buffer) => AlertFilter.decode(value),
-    responseSerialize: (value: AlertList) => Buffer.from(AlertList.encode(value).finish()),
-    responseDeserialize: (value: Buffer) => AlertList.decode(value),
-  },
 } as const;
 
 export interface AlertServiceServer extends UntypedServiceImplementation {
   upsert: handleUnaryCall<Alert, Empty>;
   delete: handleUnaryCall<AssetKey, Empty>;
   get: handleUnaryCall<AssetKey, Alert>;
-  list: handleUnaryCall<AlertFilter, AlertList>;
 }
 
 export interface AlertServiceClient extends Client {
@@ -105,18 +95,6 @@ export interface AlertServiceClient extends Client {
     metadata: Metadata,
     options: Partial<CallOptions>,
     callback: (error: ServiceError | null, response: Alert) => void,
-  ): ClientUnaryCall;
-  list(request: AlertFilter, callback: (error: ServiceError | null, response: AlertList) => void): ClientUnaryCall;
-  list(
-    request: AlertFilter,
-    metadata: Metadata,
-    callback: (error: ServiceError | null, response: AlertList) => void,
-  ): ClientUnaryCall;
-  list(
-    request: AlertFilter,
-    metadata: Metadata,
-    options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: AlertList) => void,
   ): ClientUnaryCall;
 }
 

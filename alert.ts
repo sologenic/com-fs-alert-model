@@ -91,12 +91,6 @@ export interface AlertFilter {
   Limit?: number | undefined;
 }
 
-export interface AlertList {
-  Alerts: Alert[];
-  Offset?: number | undefined;
-  Limit?: number | undefined;
-}
-
 function createBaseAlert(): Alert {
   return { Alert: undefined, MetaData: undefined, Audit: undefined };
 }
@@ -526,95 +520,6 @@ export const AlertFilter = {
     const message = createBaseAlertFilter();
     message.OrganizationID = object.OrganizationID ?? "";
     message.Network = object.Network ?? undefined;
-    message.Offset = object.Offset ?? undefined;
-    message.Limit = object.Limit ?? undefined;
-    return message;
-  },
-};
-
-function createBaseAlertList(): AlertList {
-  return { Alerts: [], Offset: undefined, Limit: undefined };
-}
-
-export const AlertList = {
-  encode(message: AlertList, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.Alerts) {
-      Alert.encode(v!, writer.uint32(10).fork()).ldelim();
-    }
-    if (message.Offset !== undefined) {
-      writer.uint32(16).int32(message.Offset);
-    }
-    if (message.Limit !== undefined) {
-      writer.uint32(24).int32(message.Limit);
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): AlertList {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseAlertList();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.Alerts.push(Alert.decode(reader, reader.uint32()));
-          continue;
-        case 2:
-          if (tag !== 16) {
-            break;
-          }
-
-          message.Offset = reader.int32();
-          continue;
-        case 3:
-          if (tag !== 24) {
-            break;
-          }
-
-          message.Limit = reader.int32();
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): AlertList {
-    return {
-      Alerts: globalThis.Array.isArray(object?.Alerts) ? object.Alerts.map((e: any) => Alert.fromJSON(e)) : [],
-      Offset: isSet(object.Offset) ? globalThis.Number(object.Offset) : undefined,
-      Limit: isSet(object.Limit) ? globalThis.Number(object.Limit) : undefined,
-    };
-  },
-
-  toJSON(message: AlertList): unknown {
-    const obj: any = {};
-    if (message.Alerts?.length) {
-      obj.Alerts = message.Alerts.map((e) => Alert.toJSON(e));
-    }
-    if (message.Offset !== undefined) {
-      obj.Offset = Math.round(message.Offset);
-    }
-    if (message.Limit !== undefined) {
-      obj.Limit = Math.round(message.Limit);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<AlertList>, I>>(base?: I): AlertList {
-    return AlertList.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<AlertList>, I>>(object: I): AlertList {
-    const message = createBaseAlertList();
-    message.Alerts = object.Alerts?.map((e) => Alert.fromPartial(e)) || [];
     message.Offset = object.Offset ?? undefined;
     message.Limit = object.Limit ?? undefined;
     return message;

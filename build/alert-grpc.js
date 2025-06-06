@@ -39,14 +39,5 @@ exports.AlertServiceService = {
         responseSerialize: (value) => Buffer.from(alert_1.Alert.encode(value).finish()),
         responseDeserialize: (value) => alert_1.Alert.decode(value),
     },
-    list: {
-        path: "/alert.AlertService/List",
-        requestStream: false,
-        responseStream: false,
-        requestSerialize: (value) => Buffer.from(alert_1.AlertFilter.encode(value).finish()),
-        requestDeserialize: (value) => alert_1.AlertFilter.decode(value),
-        responseSerialize: (value) => Buffer.from(alert_1.AlertList.encode(value).finish()),
-        responseDeserialize: (value) => alert_1.AlertList.decode(value),
-    },
 };
 exports.AlertServiceClient = (0, grpc_js_1.makeGenericClientConstructor)(exports.AlertServiceService, "alert.AlertService");
