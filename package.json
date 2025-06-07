@@ -1,0 +1,21 @@
+{
+  "name": "com-fs-alert-model",
+  "version": "1.0.0",
+  "description": "",
+  "main": "build/alert.js",
+  "module": "build/alert.js",
+  "scripts": {
+    "build": "rm -rf ./build && npx tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@grpc/grpc-js": "^1.13.3",
+    "bignumber.js": "^9.1.1",
+    "long": "^5.2.3",
+    "protobufjs": "^7.2.3",
+    "protoc-gen-ts": "^0.8.5",
+    "ts-proto": "^1.138.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.4"
+  }
+}
