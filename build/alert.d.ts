@@ -36,6 +36,10 @@ export interface AlertFilter {
     Offset?: number | undefined;
     Limit?: number | undefined;
 }
+export interface AlertList {
+    Alerts: Alert[];
+    TotalCount: number;
+}
 export declare const Alert: {
     encode(message: Alert, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Alert;
@@ -247,6 +251,258 @@ export declare const AlertFilter: {
         Offset?: number | undefined;
         Limit?: number | undefined;
     } & { [K_1 in Exclude<keyof I_1, keyof AlertFilter>]: never; }>(object: I_1): AlertFilter;
+};
+export declare const AlertList: {
+    encode(message: AlertList, writer?: _m0.Writer): _m0.Writer;
+    decode(input: _m0.Reader | Uint8Array, length?: number): AlertList;
+    fromJSON(object: any): AlertList;
+    toJSON(message: AlertList): unknown;
+    create<I extends {
+        Alerts?: {
+            Alert?: {
+                AlertID?: number | undefined;
+                Account?: string | undefined;
+                AssetKey?: string | undefined;
+                TargetPrice?: number | undefined;
+                Status?: AlertStatus | undefined;
+                OrganizationID?: string | undefined;
+            } | undefined;
+            MetaData?: {
+                Network?: Network | undefined;
+                UpdatedAt?: Date | undefined;
+                CreatedAt?: Date | undefined;
+                UpdatedByAccount?: string | undefined;
+            } | undefined;
+            Audit?: {
+                ChangedBy?: string | undefined;
+                ChangedAt?: Date | undefined;
+                Reason?: string | undefined;
+            } | undefined;
+        }[] | undefined;
+        TotalCount?: number | undefined;
+    } & {
+        Alerts?: ({
+            Alert?: {
+                AlertID?: number | undefined;
+                Account?: string | undefined;
+                AssetKey?: string | undefined;
+                TargetPrice?: number | undefined;
+                Status?: AlertStatus | undefined;
+                OrganizationID?: string | undefined;
+            } | undefined;
+            MetaData?: {
+                Network?: Network | undefined;
+                UpdatedAt?: Date | undefined;
+                CreatedAt?: Date | undefined;
+                UpdatedByAccount?: string | undefined;
+            } | undefined;
+            Audit?: {
+                ChangedBy?: string | undefined;
+                ChangedAt?: Date | undefined;
+                Reason?: string | undefined;
+            } | undefined;
+        }[] & ({
+            Alert?: {
+                AlertID?: number | undefined;
+                Account?: string | undefined;
+                AssetKey?: string | undefined;
+                TargetPrice?: number | undefined;
+                Status?: AlertStatus | undefined;
+                OrganizationID?: string | undefined;
+            } | undefined;
+            MetaData?: {
+                Network?: Network | undefined;
+                UpdatedAt?: Date | undefined;
+                CreatedAt?: Date | undefined;
+                UpdatedByAccount?: string | undefined;
+            } | undefined;
+            Audit?: {
+                ChangedBy?: string | undefined;
+                ChangedAt?: Date | undefined;
+                Reason?: string | undefined;
+            } | undefined;
+        } & {
+            Alert?: ({
+                AlertID?: number | undefined;
+                Account?: string | undefined;
+                AssetKey?: string | undefined;
+                TargetPrice?: number | undefined;
+                Status?: AlertStatus | undefined;
+                OrganizationID?: string | undefined;
+            } & {
+                AlertID?: number | undefined;
+                Account?: string | undefined;
+                AssetKey?: string | undefined;
+                TargetPrice?: number | undefined;
+                Status?: AlertStatus | undefined;
+                OrganizationID?: string | undefined;
+            } & { [K in Exclude<keyof I["Alerts"][number]["Alert"], keyof AlertDetails>]: never; }) | undefined;
+            MetaData?: ({
+                Network?: Network | undefined;
+                UpdatedAt?: Date | undefined;
+                CreatedAt?: Date | undefined;
+                UpdatedByAccount?: string | undefined;
+            } & {
+                Network?: Network | undefined;
+                UpdatedAt?: Date | undefined;
+                CreatedAt?: Date | undefined;
+                UpdatedByAccount?: string | undefined;
+            } & { [K_1 in Exclude<keyof I["Alerts"][number]["MetaData"], keyof MetaData>]: never; }) | undefined;
+            Audit?: ({
+                ChangedBy?: string | undefined;
+                ChangedAt?: Date | undefined;
+                Reason?: string | undefined;
+            } & {
+                ChangedBy?: string | undefined;
+                ChangedAt?: Date | undefined;
+                Reason?: string | undefined;
+            } & { [K_2 in Exclude<keyof I["Alerts"][number]["Audit"], keyof Audit>]: never; }) | undefined;
+        } & { [K_3 in Exclude<keyof I["Alerts"][number], keyof Alert>]: never; })[] & { [K_4 in Exclude<keyof I["Alerts"], keyof {
+            Alert?: {
+                AlertID?: number | undefined;
+                Account?: string | undefined;
+                AssetKey?: string | undefined;
+                TargetPrice?: number | undefined;
+                Status?: AlertStatus | undefined;
+                OrganizationID?: string | undefined;
+            } | undefined;
+            MetaData?: {
+                Network?: Network | undefined;
+                UpdatedAt?: Date | undefined;
+                CreatedAt?: Date | undefined;
+                UpdatedByAccount?: string | undefined;
+            } | undefined;
+            Audit?: {
+                ChangedBy?: string | undefined;
+                ChangedAt?: Date | undefined;
+                Reason?: string | undefined;
+            } | undefined;
+        }[]>]: never; }) | undefined;
+        TotalCount?: number | undefined;
+    } & { [K_5 in Exclude<keyof I, keyof AlertList>]: never; }>(base?: I | undefined): AlertList;
+    fromPartial<I_1 extends {
+        Alerts?: {
+            Alert?: {
+                AlertID?: number | undefined;
+                Account?: string | undefined;
+                AssetKey?: string | undefined;
+                TargetPrice?: number | undefined;
+                Status?: AlertStatus | undefined;
+                OrganizationID?: string | undefined;
+            } | undefined;
+            MetaData?: {
+                Network?: Network | undefined;
+                UpdatedAt?: Date | undefined;
+                CreatedAt?: Date | undefined;
+                UpdatedByAccount?: string | undefined;
+            } | undefined;
+            Audit?: {
+                ChangedBy?: string | undefined;
+                ChangedAt?: Date | undefined;
+                Reason?: string | undefined;
+            } | undefined;
+        }[] | undefined;
+        TotalCount?: number | undefined;
+    } & {
+        Alerts?: ({
+            Alert?: {
+                AlertID?: number | undefined;
+                Account?: string | undefined;
+                AssetKey?: string | undefined;
+                TargetPrice?: number | undefined;
+                Status?: AlertStatus | undefined;
+                OrganizationID?: string | undefined;
+            } | undefined;
+            MetaData?: {
+                Network?: Network | undefined;
+                UpdatedAt?: Date | undefined;
+                CreatedAt?: Date | undefined;
+                UpdatedByAccount?: string | undefined;
+            } | undefined;
+            Audit?: {
+                ChangedBy?: string | undefined;
+                ChangedAt?: Date | undefined;
+                Reason?: string | undefined;
+            } | undefined;
+        }[] & ({
+            Alert?: {
+                AlertID?: number | undefined;
+                Account?: string | undefined;
+                AssetKey?: string | undefined;
+                TargetPrice?: number | undefined;
+                Status?: AlertStatus | undefined;
+                OrganizationID?: string | undefined;
+            } | undefined;
+            MetaData?: {
+                Network?: Network | undefined;
+                UpdatedAt?: Date | undefined;
+                CreatedAt?: Date | undefined;
+                UpdatedByAccount?: string | undefined;
+            } | undefined;
+            Audit?: {
+                ChangedBy?: string | undefined;
+                ChangedAt?: Date | undefined;
+                Reason?: string | undefined;
+            } | undefined;
+        } & {
+            Alert?: ({
+                AlertID?: number | undefined;
+                Account?: string | undefined;
+                AssetKey?: string | undefined;
+                TargetPrice?: number | undefined;
+                Status?: AlertStatus | undefined;
+                OrganizationID?: string | undefined;
+            } & {
+                AlertID?: number | undefined;
+                Account?: string | undefined;
+                AssetKey?: string | undefined;
+                TargetPrice?: number | undefined;
+                Status?: AlertStatus | undefined;
+                OrganizationID?: string | undefined;
+            } & { [K_6 in Exclude<keyof I_1["Alerts"][number]["Alert"], keyof AlertDetails>]: never; }) | undefined;
+            MetaData?: ({
+                Network?: Network | undefined;
+                UpdatedAt?: Date | undefined;
+                CreatedAt?: Date | undefined;
+                UpdatedByAccount?: string | undefined;
+            } & {
+                Network?: Network | undefined;
+                UpdatedAt?: Date | undefined;
+                CreatedAt?: Date | undefined;
+                UpdatedByAccount?: string | undefined;
+            } & { [K_7 in Exclude<keyof I_1["Alerts"][number]["MetaData"], keyof MetaData>]: never; }) | undefined;
+            Audit?: ({
+                ChangedBy?: string | undefined;
+                ChangedAt?: Date | undefined;
+                Reason?: string | undefined;
+            } & {
+                ChangedBy?: string | undefined;
+                ChangedAt?: Date | undefined;
+                Reason?: string | undefined;
+            } & { [K_8 in Exclude<keyof I_1["Alerts"][number]["Audit"], keyof Audit>]: never; }) | undefined;
+        } & { [K_9 in Exclude<keyof I_1["Alerts"][number], keyof Alert>]: never; })[] & { [K_10 in Exclude<keyof I_1["Alerts"], keyof {
+            Alert?: {
+                AlertID?: number | undefined;
+                Account?: string | undefined;
+                AssetKey?: string | undefined;
+                TargetPrice?: number | undefined;
+                Status?: AlertStatus | undefined;
+                OrganizationID?: string | undefined;
+            } | undefined;
+            MetaData?: {
+                Network?: Network | undefined;
+                UpdatedAt?: Date | undefined;
+                CreatedAt?: Date | undefined;
+                UpdatedByAccount?: string | undefined;
+            } | undefined;
+            Audit?: {
+                ChangedBy?: string | undefined;
+                ChangedAt?: Date | undefined;
+                Reason?: string | undefined;
+            } | undefined;
+        }[]>]: never; }) | undefined;
+        TotalCount?: number | undefined;
+    } & { [K_11 in Exclude<keyof I_1, keyof AlertList>]: never; }>(object: I_1): AlertList;
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 export type DeepPartial<T> = T extends Builtin ? T : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {

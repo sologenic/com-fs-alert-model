@@ -91,6 +91,11 @@ export interface AlertFilter {
   Limit?: number | undefined;
 }
 
+export interface AlertList {
+  Alerts: Alert[];
+  TotalCount: number;
+}
+
 function createBaseAlert(): Alert {
   return { Alert: undefined, MetaData: undefined, Audit: undefined };
 }
@@ -522,6 +527,80 @@ export const AlertFilter = {
     message.Network = object.Network ?? undefined;
     message.Offset = object.Offset ?? undefined;
     message.Limit = object.Limit ?? undefined;
+    return message;
+  },
+};
+
+function createBaseAlertList(): AlertList {
+  return { Alerts: [], TotalCount: 0 };
+}
+
+export const AlertList = {
+  encode(message: AlertList, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    for (const v of message.Alerts) {
+      Alert.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.TotalCount !== 0) {
+      writer.uint32(16).int32(message.TotalCount);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): AlertList {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAlertList();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.Alerts.push(Alert.decode(reader, reader.uint32()));
+          continue;
+        case 2:
+          if (tag !== 16) {
+            break;
+          }
+
+          message.TotalCount = reader.int32();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): AlertList {
+    return {
+      Alerts: globalThis.Array.isArray(object?.Alerts) ? object.Alerts.map((e: any) => Alert.fromJSON(e)) : [],
+      TotalCount: isSet(object.TotalCount) ? globalThis.Number(object.TotalCount) : 0,
+    };
+  },
+
+  toJSON(message: AlertList): unknown {
+    const obj: any = {};
+    if (message.Alerts?.length) {
+      obj.Alerts = message.Alerts.map((e) => Alert.toJSON(e));
+    }
+    if (message.TotalCount !== 0) {
+      obj.TotalCount = Math.round(message.TotalCount);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<AlertList>, I>>(base?: I): AlertList {
+    return AlertList.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<AlertList>, I>>(object: I): AlertList {
+    const message = createBaseAlertList();
+    message.Alerts = object.Alerts?.map((e) => Alert.fromPartial(e)) || [];
+    message.TotalCount = object.TotalCount ?? 0;
     return message;
   },
 };
