@@ -8,7 +8,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AlertFilter = exports.AssetKey = exports.AlertDetails = exports.Alert = exports.alertStatusToJSON = exports.alertStatusFromJSON = exports.AlertStatus = exports.protobufPackage = void 0;
+exports.AlertList = exports.AlertFilter = exports.AssetKey = exports.AlertDetails = exports.Alert = exports.alertStatusToJSON = exports.alertStatusFromJSON = exports.AlertStatus = exports.protobufPackage = void 0;
 /* eslint-disable */
 const long_1 = __importDefault(require("long"));
 const minimal_1 = __importDefault(require("protobufjs/minimal"));
@@ -454,6 +454,74 @@ exports.AlertFilter = {
         message.Network = (_b = object.Network) !== null && _b !== void 0 ? _b : undefined;
         message.Offset = (_c = object.Offset) !== null && _c !== void 0 ? _c : undefined;
         message.Limit = (_d = object.Limit) !== null && _d !== void 0 ? _d : undefined;
+        return message;
+    },
+};
+function createBaseAlertList() {
+    return { Alerts: [], TotalCount: 0 };
+}
+exports.AlertList = {
+    encode(message, writer = minimal_1.default.Writer.create()) {
+        for (const v of message.Alerts) {
+            exports.Alert.encode(v, writer.uint32(10).fork()).ldelim();
+        }
+        if (message.TotalCount !== 0) {
+            writer.uint32(16).int32(message.TotalCount);
+        }
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseAlertList();
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1:
+                    if (tag !== 10) {
+                        break;
+                    }
+                    message.Alerts.push(exports.Alert.decode(reader, reader.uint32()));
+                    continue;
+                case 2:
+                    if (tag !== 16) {
+                        break;
+                    }
+                    message.TotalCount = reader.int32();
+                    continue;
+            }
+            if ((tag & 7) === 4 || tag === 0) {
+                break;
+            }
+            reader.skipType(tag & 7);
+        }
+        return message;
+    },
+    fromJSON(object) {
+        return {
+            Alerts: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.Alerts) ? object.Alerts.map((e) => exports.Alert.fromJSON(e)) : [],
+            TotalCount: isSet(object.TotalCount) ? globalThis.Number(object.TotalCount) : 0,
+        };
+    },
+    toJSON(message) {
+        var _a;
+        const obj = {};
+        if ((_a = message.Alerts) === null || _a === void 0 ? void 0 : _a.length) {
+            obj.Alerts = message.Alerts.map((e) => exports.Alert.toJSON(e));
+        }
+        if (message.TotalCount !== 0) {
+            obj.TotalCount = Math.round(message.TotalCount);
+        }
+        return obj;
+    },
+    create(base) {
+        return exports.AlertList.fromPartial(base !== null && base !== void 0 ? base : {});
+    },
+    fromPartial(object) {
+        var _a, _b;
+        const message = createBaseAlertList();
+        message.Alerts = ((_a = object.Alerts) === null || _a === void 0 ? void 0 : _a.map((e) => exports.Alert.fromPartial(e))) || [];
+        message.TotalCount = (_b = object.TotalCount) !== null && _b !== void 0 ? _b : 0;
         return message;
     },
 };
