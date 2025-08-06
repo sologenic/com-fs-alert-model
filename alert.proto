@@ -29,6 +29,7 @@ message AssetKey {
     string OrganizationID = 3; 
     optional metadata.Network Network = 4; 
     optional int64 AlertID = 5;
+    double TargetPrice = 6;
 }
 
 message AlertFilter {

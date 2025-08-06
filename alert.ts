@@ -83,6 +83,7 @@ export interface AssetKey {
   OrganizationID: string;
   Network?: Network | undefined;
   AlertID?: number | undefined;
+  TargetPrice: number;
 }
 
 export interface AlertFilter {
@@ -325,7 +326,7 @@ export const AlertDetails = {
 };
 
 function createBaseAssetKey(): AssetKey {
-  return { Account: "", AssetKey: "", OrganizationID: "", Network: undefined, AlertID: undefined };
+  return { Account: "", AssetKey: "", OrganizationID: "", Network: undefined, AlertID: undefined, TargetPrice: 0 };
 }
 
 export const AssetKey = {
@@ -344,6 +345,9 @@ export const AssetKey = {
     }
     if (message.AlertID !== undefined) {
       writer.uint32(40).int64(message.AlertID);
+    }
+    if (message.TargetPrice !== 0) {
+      writer.uint32(49).double(message.TargetPrice);
     }
     return writer;
   },
@@ -390,6 +394,13 @@ export const AssetKey = {
 
           message.AlertID = longToNumber(reader.int64() as Long);
           continue;
+        case 6:
+          if (tag !== 49) {
+            break;
+          }
+
+          message.TargetPrice = reader.double();
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -406,6 +417,7 @@ export const AssetKey = {
       OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
       Network: isSet(object.Network) ? networkFromJSON(object.Network) : undefined,
       AlertID: isSet(object.AlertID) ? globalThis.Number(object.AlertID) : undefined,
+      TargetPrice: isSet(object.TargetPrice) ? globalThis.Number(object.TargetPrice) : 0,
     };
   },
 
@@ -426,6 +438,9 @@ export const AssetKey = {
     if (message.AlertID !== undefined) {
       obj.AlertID = Math.round(message.AlertID);
     }
+    if (message.TargetPrice !== 0) {
+      obj.TargetPrice = message.TargetPrice;
+    }
     return obj;
   },
 
@@ -439,6 +454,7 @@ export const AssetKey = {
     message.OrganizationID = object.OrganizationID ?? "";
     message.Network = object.Network ?? undefined;
     message.AlertID = object.AlertID ?? undefined;
+    message.TargetPrice = object.TargetPrice ?? 0;
     return message;
   },
 };

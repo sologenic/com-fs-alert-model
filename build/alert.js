@@ -268,7 +268,7 @@ exports.AlertDetails = {
     },
 };
 function createBaseAssetKey() {
-    return { Account: "", AssetKey: "", OrganizationID: "", Network: undefined, AlertID: undefined };
+    return { Account: "", AssetKey: "", OrganizationID: "", Network: undefined, AlertID: undefined, TargetPrice: 0 };
 }
 exports.AssetKey = {
     encode(message, writer = minimal_1.default.Writer.create()) {
@@ -286,6 +286,9 @@ exports.AssetKey = {
         }
         if (message.AlertID !== undefined) {
             writer.uint32(40).int64(message.AlertID);
+        }
+        if (message.TargetPrice !== 0) {
+            writer.uint32(49).double(message.TargetPrice);
         }
         return writer;
     },
@@ -326,6 +329,12 @@ exports.AssetKey = {
                     }
                     message.AlertID = longToNumber(reader.int64());
                     continue;
+                case 6:
+                    if (tag !== 49) {
+                        break;
+                    }
+                    message.TargetPrice = reader.double();
+                    continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
                 break;
@@ -341,6 +350,7 @@ exports.AssetKey = {
             OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
             Network: isSet(object.Network) ? (0, metadata_1.networkFromJSON)(object.Network) : undefined,
             AlertID: isSet(object.AlertID) ? globalThis.Number(object.AlertID) : undefined,
+            TargetPrice: isSet(object.TargetPrice) ? globalThis.Number(object.TargetPrice) : 0,
         };
     },
     toJSON(message) {
@@ -360,19 +370,23 @@ exports.AssetKey = {
         if (message.AlertID !== undefined) {
             obj.AlertID = Math.round(message.AlertID);
         }
+        if (message.TargetPrice !== 0) {
+            obj.TargetPrice = message.TargetPrice;
+        }
         return obj;
     },
     create(base) {
         return exports.AssetKey.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-        var _a, _b, _c, _d, _e;
+        var _a, _b, _c, _d, _e, _f;
         const message = createBaseAssetKey();
         message.Account = (_a = object.Account) !== null && _a !== void 0 ? _a : "";
         message.AssetKey = (_b = object.AssetKey) !== null && _b !== void 0 ? _b : "";
         message.OrganizationID = (_c = object.OrganizationID) !== null && _c !== void 0 ? _c : "";
         message.Network = (_d = object.Network) !== null && _d !== void 0 ? _d : undefined;
         message.AlertID = (_e = object.AlertID) !== null && _e !== void 0 ? _e : undefined;
+        message.TargetPrice = (_f = object.TargetPrice) !== null && _f !== void 0 ? _f : 0;
         return message;
     },
 };
