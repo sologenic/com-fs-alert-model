@@ -82,6 +82,7 @@ export interface AssetKey {
   AssetKey: string;
   OrganizationID: string;
   Network?: Network | undefined;
+  AlertID?: number | undefined;
 }
 
 export interface AlertFilter {
@@ -324,7 +325,7 @@ export const AlertDetails = {
 };
 
 function createBaseAssetKey(): AssetKey {
-  return { Account: "", AssetKey: "", OrganizationID: "", Network: undefined };
+  return { Account: "", AssetKey: "", OrganizationID: "", Network: undefined, AlertID: undefined };
 }
 
 export const AssetKey = {
@@ -340,6 +341,9 @@ export const AssetKey = {
     }
     if (message.Network !== undefined) {
       writer.uint32(32).int32(message.Network);
+    }
+    if (message.AlertID !== undefined) {
+      writer.uint32(40).int64(message.AlertID);
     }
     return writer;
   },
@@ -379,6 +383,13 @@ export const AssetKey = {
 
           message.Network = reader.int32() as any;
           continue;
+        case 5:
+          if (tag !== 40) {
+            break;
+          }
+
+          message.AlertID = longToNumber(reader.int64() as Long);
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -394,6 +405,7 @@ export const AssetKey = {
       AssetKey: isSet(object.AssetKey) ? globalThis.String(object.AssetKey) : "",
       OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
       Network: isSet(object.Network) ? networkFromJSON(object.Network) : undefined,
+      AlertID: isSet(object.AlertID) ? globalThis.Number(object.AlertID) : undefined,
     };
   },
 
@@ -411,6 +423,9 @@ export const AssetKey = {
     if (message.Network !== undefined) {
       obj.Network = networkToJSON(message.Network);
     }
+    if (message.AlertID !== undefined) {
+      obj.AlertID = Math.round(message.AlertID);
+    }
     return obj;
   },
 
@@ -423,6 +438,7 @@ export const AssetKey = {
     message.AssetKey = object.AssetKey ?? "";
     message.OrganizationID = object.OrganizationID ?? "";
     message.Network = object.Network ?? undefined;
+    message.AlertID = object.AlertID ?? undefined;
     return message;
   },
 };

@@ -29,6 +29,7 @@ export interface AssetKey {
     AssetKey: string;
     OrganizationID: string;
     Network?: Network | undefined;
+    AlertID?: number | undefined;
 }
 export interface AlertFilter {
     OrganizationID: string;
@@ -206,22 +207,26 @@ export declare const AssetKey: {
         AssetKey?: string | undefined;
         OrganizationID?: string | undefined;
         Network?: Network | undefined;
+        AlertID?: number | undefined;
     } & {
         Account?: string | undefined;
         AssetKey?: string | undefined;
         OrganizationID?: string | undefined;
         Network?: Network | undefined;
+        AlertID?: number | undefined;
     } & { [K in Exclude<keyof I, keyof AssetKey>]: never; }>(base?: I | undefined): AssetKey;
     fromPartial<I_1 extends {
         Account?: string | undefined;
         AssetKey?: string | undefined;
         OrganizationID?: string | undefined;
         Network?: Network | undefined;
+        AlertID?: number | undefined;
     } & {
         Account?: string | undefined;
         AssetKey?: string | undefined;
         OrganizationID?: string | undefined;
         Network?: Network | undefined;
+        AlertID?: number | undefined;
     } & { [K_1 in Exclude<keyof I_1, keyof AssetKey>]: never; }>(object: I_1): AssetKey;
 };
 export declare const AlertFilter: {

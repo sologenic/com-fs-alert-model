@@ -268,7 +268,7 @@ exports.AlertDetails = {
     },
 };
 function createBaseAssetKey() {
-    return { Account: "", AssetKey: "", OrganizationID: "", Network: undefined };
+    return { Account: "", AssetKey: "", OrganizationID: "", Network: undefined, AlertID: undefined };
 }
 exports.AssetKey = {
     encode(message, writer = minimal_1.default.Writer.create()) {
@@ -283,6 +283,9 @@ exports.AssetKey = {
         }
         if (message.Network !== undefined) {
             writer.uint32(32).int32(message.Network);
+        }
+        if (message.AlertID !== undefined) {
+            writer.uint32(40).int64(message.AlertID);
         }
         return writer;
     },
@@ -317,6 +320,12 @@ exports.AssetKey = {
                     }
                     message.Network = reader.int32();
                     continue;
+                case 5:
+                    if (tag !== 40) {
+                        break;
+                    }
+                    message.AlertID = longToNumber(reader.int64());
+                    continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
                 break;
@@ -331,6 +340,7 @@ exports.AssetKey = {
             AssetKey: isSet(object.AssetKey) ? globalThis.String(object.AssetKey) : "",
             OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
             Network: isSet(object.Network) ? (0, metadata_1.networkFromJSON)(object.Network) : undefined,
+            AlertID: isSet(object.AlertID) ? globalThis.Number(object.AlertID) : undefined,
         };
     },
     toJSON(message) {
@@ -347,18 +357,22 @@ exports.AssetKey = {
         if (message.Network !== undefined) {
             obj.Network = (0, metadata_1.networkToJSON)(message.Network);
         }
+        if (message.AlertID !== undefined) {
+            obj.AlertID = Math.round(message.AlertID);
+        }
         return obj;
     },
     create(base) {
         return exports.AssetKey.fromPartial(base !== null && base !== void 0 ? base : {});
     },
     fromPartial(object) {
-        var _a, _b, _c, _d;
+        var _a, _b, _c, _d, _e;
         const message = createBaseAssetKey();
         message.Account = (_a = object.Account) !== null && _a !== void 0 ? _a : "";
         message.AssetKey = (_b = object.AssetKey) !== null && _b !== void 0 ? _b : "";
         message.OrganizationID = (_c = object.OrganizationID) !== null && _c !== void 0 ? _c : "";
         message.Network = (_d = object.Network) !== null && _d !== void 0 ? _d : undefined;
+        message.AlertID = (_e = object.AlertID) !== null && _e !== void 0 ? _e : undefined;
         return message;
     },
 };
