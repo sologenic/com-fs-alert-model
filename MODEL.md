@@ -6,6 +6,7 @@
 - [alert.proto](#alert)
   - [Messages](#messages)
     - [Alert](#alert)
+    - [AlertDetails](#alertdetails)
     - [AssetKey](#assetkey)
     - [AlertFilter](#alertfilter)
     - [AlertList](#alertlist)
@@ -14,12 +15,13 @@
 
 ## Overview
 
-The Alert provides a comprehensive data structure for managing alert within the system. This model supports status management: tracks status for administrative control, organizational context: links items to organizations via organizationid, metadata and audit: includes metadata and audit trails for tracking changes, and more. 
+The Alert provides a comprehensive data structure for managing alert within the system. This model supports metadata and audit: includes metadata and audit trails for tracking changes, identification: provides unique identifiers for alert, status management: tracks status for administrative control, and more. 
 
 Key features of the {model_name.lower()} model include:
+- **Metadata and Audit**: Includes metadata and audit trails for tracking changes
+- **Identification**: Provides unique identifiers for alert
 - **Status Management**: Tracks status for administrative control
 - **Organizational Context**: Links items to organizations via OrganizationID
-- **Metadata and Audit**: Includes metadata and audit trails for tracking changes
 - **Pagination Support**: Provides offset-based pagination for collections
 
 ## alert.proto
@@ -43,18 +45,41 @@ The `Alert` message provides alert data and operations.
 
 | Field Name | Type | Required/Optional | Description |
 |------------|------|-------------------|-------------|
-| TargetPrice | `double` | Required | TargetPrice field |
-| Status | `AlertStatus` | Required | Current status of this item (see related enum) |
-| OrganizationID | `string` | Required | UUID of the organization this item belongs to |
+| Alert | `AlertDetails` | Required | Alert field |
+| MetaData | `metadata.MetaData` | Required | Metadata information including network and version details |
+| Audit | `audit.Audit` | Required | Audit trail information for tracking changes and access |
 
 **Use Cases:**
 - Creating new alert records
 - Retrieving alert information
 - Updating alert data
+
+**Important Notes:**
+- This message provides the alert representation
+
+#### AlertDetails {#alertdetails}
+
+The `AlertDetails` message contains all the core information about a alert, including essential details and metadata.
+
+**Field Table:**
+
+| Field Name | Type | Required/Optional | Description |
+|------------|------|-------------------|-------------|
+| AlertID | `int64` | Required | Unique identifier for the alert |
+| Account | `string` | Required | Account value |
+| AssetKey | `string` | Required | AssetKey value |
+| TargetPrice | `double` | Required | TargetPrice field |
+| Status | `AlertStatus` | Required | Current status of this item (see related enum) |
+| OrganizationID | `string` | Required | UUID of the organization this item belongs to |
+
+**Use Cases:**
+- Creating new alert records with complete information
+- Updating alert information
 - Tracking status for administrative purposes
 - Associating items with specific organizations
 
 **Important Notes:**
+- The `AlertID` field must match a valid identifier format
 - The `Status` field determines the current state of this item
 - The `OrganizationID` must be a valid UUID format
 
