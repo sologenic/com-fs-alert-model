@@ -17,7 +17,7 @@
 
 The Alert provides a comprehensive data structure for managing alert within the system. This model supports metadata and audit: includes metadata and audit trails for tracking changes, identification: provides unique identifiers for alert, status management: tracks status for administrative control, and more. 
 
-Key features of the {model_name.lower()} model include:
+Key features of the alert model include:
 - **Metadata and Audit**: Includes metadata and audit trails for tracking changes
 - **Identification**: Provides unique identifiers for alert
 - **Status Management**: Tracks status for administrative control
