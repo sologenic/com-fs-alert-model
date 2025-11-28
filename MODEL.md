@@ -10,6 +10,8 @@
     - [AssetKey](#assetkey)
     - [AlertFilter](#alertfilter)
     - [AlertList](#alertlist)
+  - [Enums](#enums)
+    - [AlertStatus](#alertstatus)
 - [Version Information](#version-information)
 - [Support](#support)
 
@@ -148,6 +150,31 @@ The `AlertList` message represents a collection of alertlist with pagination sup
 
 **Important Notes:**
 - This message provides the alertlist representation
+
+### Enums
+
+#### AlertStatus {#alertstatus}
+
+The `AlertStatus` enum defines the possible states or types for alert, allowing for classification and state management.
+
+**Value Table:**
+
+| Value Name | Number | Description |
+|------------|--------|-------------|
+| DO_NOT_USE | 0 | Default/unused value (protobuf convention) |
+| ACTIVE | 1 | Active state or type |
+| TRIGGERED | 2 | Triggered state or type |
+| CANCELLED | 3 | Cancelled state or type |
+
+**Use Cases:**
+- Setting alertstatus for items
+- Filtering items by alertstatus in queries
+- Enforcing business logic based on alertstatus
+
+**Important Notes:**
+- Values with `NOT_USED` prefix or number 0 follow protobuf conventions for default enum values and should not be actively used
+- Only valid alertstatus values should be used in production code
+- AlertStatus changes should be tracked in audit trails for compliance purposes
 
 ## Version Information
 
