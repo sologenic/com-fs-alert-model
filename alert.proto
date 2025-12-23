@@ -27,7 +27,8 @@ message AssetKey {
     string Account = 1;
     string AssetKey = 2;
     string OrganizationID = 3; 
-    optional metadata.Network Network = 4; 
+    optional metadata.Network Network = 4;
+    string AlertID = 5;
 }
 
 message AlertFilter {

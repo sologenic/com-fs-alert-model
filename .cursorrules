@@ -9,7 +9,7 @@ Generate comprehensive documentation for all Protocol Buffer (`.proto`) files in
 
 1. **Structure:**
    - Start with a title: "# Alert Documentation"
-   - Include a table of contents listing all proto files
+   - Include a table of contents listing the proto file(s) being documented
    - Provide an overview section describing the alert model's purpose and key features
    - Document each proto file in separate sections
 
@@ -22,15 +22,11 @@ Generate comprehensive documentation for all Protocol Buffer (`.proto`) files in
      - Important notes and constraints
    - Complete documentation of all enums with:
      - Value tables showing: Value name, Number, Description
-   - Complete documentation of all services (for gRPC files) with:
-     - Method signatures
-     - Request/Response parameters
-     - Behavior descriptions
-     - Use cases
-     - Error conditions
 
 3. **Proto files to document:**
    - alert.proto - Alert model and definitions
+   
+   **Note:** alert-grpc.proto is excluded from documentation generation.
    
 4. **Documentation style:**
    - Use clear, professional language
