@@ -17,10 +17,251 @@ import {
   type ServiceError,
   type UntypedServiceImplementation,
 } from "@grpc/grpc-js";
-import { Alert, AlertFilter, AlertList, AssetKey } from "./alert";
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { Alert, AlertList } from "./alert";
 import { Empty } from "./google/protobuf/Empty";
+import { Network, networkFromJSON, networkToJSON } from "./sologenic/com-fs-utils-lib/models/metadata/metadata";
 
 export const protobufPackage = "alert";
+
+export interface AssetKey {
+  Account: string;
+  AssetKey: string;
+  OrganizationID: string;
+  Network?: Network | undefined;
+  AlertID: number;
+}
+
+export interface AlertFilter {
+  OrganizationID: string;
+  Network?: Network | undefined;
+  Offset?: number | undefined;
+  Limit?: number | undefined;
+}
+
+function createBaseAssetKey(): AssetKey {
+  return { Account: "", AssetKey: "", OrganizationID: "", Network: undefined, AlertID: 0 };
+}
+
+export const AssetKey = {
+  encode(message: AssetKey, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.Account !== "") {
+      writer.uint32(10).string(message.Account);
+    }
+    if (message.AssetKey !== "") {
+      writer.uint32(18).string(message.AssetKey);
+    }
+    if (message.OrganizationID !== "") {
+      writer.uint32(26).string(message.OrganizationID);
+    }
+    if (message.Network !== undefined) {
+      writer.uint32(32).int32(message.Network);
+    }
+    if (message.AlertID !== 0) {
+      writer.uint32(40).int64(message.AlertID);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): AssetKey {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAssetKey();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.Account = reader.string();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.AssetKey = reader.string();
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.OrganizationID = reader.string();
+          continue;
+        case 4:
+          if (tag !== 32) {
+            break;
+          }
+
+          message.Network = reader.int32() as any;
+          continue;
+        case 5:
+          if (tag !== 40) {
+            break;
+          }
+
+          message.AlertID = longToNumber(reader.int64() as Long);
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): AssetKey {
+    return {
+      Account: isSet(object.Account) ? globalThis.String(object.Account) : "",
+      AssetKey: isSet(object.AssetKey) ? globalThis.String(object.AssetKey) : "",
+      OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
+      Network: isSet(object.Network) ? networkFromJSON(object.Network) : undefined,
+      AlertID: isSet(object.AlertID) ? globalThis.Number(object.AlertID) : 0,
+    };
+  },
+
+  toJSON(message: AssetKey): unknown {
+    const obj: any = {};
+    if (message.Account !== "") {
+      obj.Account = message.Account;
+    }
+    if (message.AssetKey !== "") {
+      obj.AssetKey = message.AssetKey;
+    }
+    if (message.OrganizationID !== "") {
+      obj.OrganizationID = message.OrganizationID;
+    }
+    if (message.Network !== undefined) {
+      obj.Network = networkToJSON(message.Network);
+    }
+    if (message.AlertID !== 0) {
+      obj.AlertID = Math.round(message.AlertID);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<AssetKey>, I>>(base?: I): AssetKey {
+    return AssetKey.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<AssetKey>, I>>(object: I): AssetKey {
+    const message = createBaseAssetKey();
+    message.Account = object.Account ?? "";
+    message.AssetKey = object.AssetKey ?? "";
+    message.OrganizationID = object.OrganizationID ?? "";
+    message.Network = object.Network ?? undefined;
+    message.AlertID = object.AlertID ?? 0;
+    return message;
+  },
+};
+
+function createBaseAlertFilter(): AlertFilter {
+  return { OrganizationID: "", Network: undefined, Offset: undefined, Limit: undefined };
+}
+
+export const AlertFilter = {
+  encode(message: AlertFilter, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.OrganizationID !== "") {
+      writer.uint32(10).string(message.OrganizationID);
+    }
+    if (message.Network !== undefined) {
+      writer.uint32(24).int32(message.Network);
+    }
+    if (message.Offset !== undefined) {
+      writer.uint32(32).int32(message.Offset);
+    }
+    if (message.Limit !== undefined) {
+      writer.uint32(40).int32(message.Limit);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): AlertFilter {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAlertFilter();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.OrganizationID = reader.string();
+          continue;
+        case 3:
+          if (tag !== 24) {
+            break;
+          }
+
+          message.Network = reader.int32() as any;
+          continue;
+        case 4:
+          if (tag !== 32) {
+            break;
+          }
+
+          message.Offset = reader.int32();
+          continue;
+        case 5:
+          if (tag !== 40) {
+            break;
+          }
+
+          message.Limit = reader.int32();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): AlertFilter {
+    return {
+      OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
+      Network: isSet(object.Network) ? networkFromJSON(object.Network) : undefined,
+      Offset: isSet(object.Offset) ? globalThis.Number(object.Offset) : undefined,
+      Limit: isSet(object.Limit) ? globalThis.Number(object.Limit) : undefined,
+    };
+  },
+
+  toJSON(message: AlertFilter): unknown {
+    const obj: any = {};
+    if (message.OrganizationID !== "") {
+      obj.OrganizationID = message.OrganizationID;
+    }
+    if (message.Network !== undefined) {
+      obj.Network = networkToJSON(message.Network);
+    }
+    if (message.Offset !== undefined) {
+      obj.Offset = Math.round(message.Offset);
+    }
+    if (message.Limit !== undefined) {
+      obj.Limit = Math.round(message.Limit);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<AlertFilter>, I>>(base?: I): AlertFilter {
+    return AlertFilter.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<AlertFilter>, I>>(object: I): AlertFilter {
+    const message = createBaseAlertFilter();
+    message.OrganizationID = object.OrganizationID ?? "";
+    message.Network = object.Network ?? undefined;
+    message.Offset = object.Offset ?? undefined;
+    message.Limit = object.Limit ?? undefined;
+    return message;
+  },
+};
 
 export type AlertServiceService = typeof AlertServiceService;
 export const AlertServiceService = {
@@ -128,3 +369,34 @@ export const AlertServiceClient = makeGenericClientConstructor(
   service: typeof AlertServiceService;
   serviceName: string;
 };
+
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
+  : Partial<T>;
+
+type KeysOfUnion<T> = T extends T ? keyof T : never;
+export type Exact<P, I extends P> = P extends Builtin ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+
+function longToNumber(long: Long): number {
+  if (long.gt(globalThis.Number.MAX_SAFE_INTEGER)) {
+    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
+  }
+  if (long.lt(globalThis.Number.MIN_SAFE_INTEGER)) {
+    throw new globalThis.Error("Value is smaller than Number.MIN_SAFE_INTEGER");
+  }
+  return long.toNumber();
+}
+
+if (_m0.util.Long !== Long) {
+  _m0.util.Long = Long as any;
+  _m0.configure();
+}
+
+function isSet(value: any): boolean {
+  return value !== null && value !== undefined;
+}

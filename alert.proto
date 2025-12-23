@@ -22,22 +22,6 @@ message AlertDetails {
     string OrganizationID = 6;
 }
 
-
-message AssetKey {
-    string Account = 1;
-    string AssetKey = 2;
-    string OrganizationID = 3; 
-    optional metadata.Network Network = 4;
-    string AlertID = 5;
-}
-
-message AlertFilter {
-    string OrganizationID = 1;
-    optional metadata.Network Network = 3;
-    optional int32 Offset = 4;
-    optional int32 Limit = 5;
-}
-
 message AlertList {
     repeated Alert Alerts = 1;
     int32 TotalCount = 2;

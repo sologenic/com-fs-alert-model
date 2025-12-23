@@ -4,13 +4,223 @@
 //   protoc-gen-ts_proto  v1.181.2
 //   protoc               v6.32.0
 // source: alert-grpc.proto
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AlertServiceClient = exports.AlertServiceService = exports.protobufPackage = void 0;
+exports.AlertServiceClient = exports.AlertServiceService = exports.AlertFilter = exports.AssetKey = exports.protobufPackage = void 0;
 /* eslint-disable */
 const grpc_js_1 = require("@grpc/grpc-js");
+const long_1 = __importDefault(require("long"));
+const minimal_1 = __importDefault(require("protobufjs/minimal"));
 const alert_1 = require("./alert");
 const Empty_1 = require("./google/protobuf/Empty");
+const metadata_1 = require("./sologenic/com-fs-utils-lib/models/metadata/metadata");
 exports.protobufPackage = "alert";
+function createBaseAssetKey() {
+    return { Account: "", AssetKey: "", OrganizationID: "", Network: undefined, AlertID: 0 };
+}
+exports.AssetKey = {
+    encode(message, writer = minimal_1.default.Writer.create()) {
+        if (message.Account !== "") {
+            writer.uint32(10).string(message.Account);
+        }
+        if (message.AssetKey !== "") {
+            writer.uint32(18).string(message.AssetKey);
+        }
+        if (message.OrganizationID !== "") {
+            writer.uint32(26).string(message.OrganizationID);
+        }
+        if (message.Network !== undefined) {
+            writer.uint32(32).int32(message.Network);
+        }
+        if (message.AlertID !== 0) {
+            writer.uint32(40).int64(message.AlertID);
+        }
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseAssetKey();
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1:
+                    if (tag !== 10) {
+                        break;
+                    }
+                    message.Account = reader.string();
+                    continue;
+                case 2:
+                    if (tag !== 18) {
+                        break;
+                    }
+                    message.AssetKey = reader.string();
+                    continue;
+                case 3:
+                    if (tag !== 26) {
+                        break;
+                    }
+                    message.OrganizationID = reader.string();
+                    continue;
+                case 4:
+                    if (tag !== 32) {
+                        break;
+                    }
+                    message.Network = reader.int32();
+                    continue;
+                case 5:
+                    if (tag !== 40) {
+                        break;
+                    }
+                    message.AlertID = longToNumber(reader.int64());
+                    continue;
+            }
+            if ((tag & 7) === 4 || tag === 0) {
+                break;
+            }
+            reader.skipType(tag & 7);
+        }
+        return message;
+    },
+    fromJSON(object) {
+        return {
+            Account: isSet(object.Account) ? globalThis.String(object.Account) : "",
+            AssetKey: isSet(object.AssetKey) ? globalThis.String(object.AssetKey) : "",
+            OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
+            Network: isSet(object.Network) ? (0, metadata_1.networkFromJSON)(object.Network) : undefined,
+            AlertID: isSet(object.AlertID) ? globalThis.Number(object.AlertID) : 0,
+        };
+    },
+    toJSON(message) {
+        const obj = {};
+        if (message.Account !== "") {
+            obj.Account = message.Account;
+        }
+        if (message.AssetKey !== "") {
+            obj.AssetKey = message.AssetKey;
+        }
+        if (message.OrganizationID !== "") {
+            obj.OrganizationID = message.OrganizationID;
+        }
+        if (message.Network !== undefined) {
+            obj.Network = (0, metadata_1.networkToJSON)(message.Network);
+        }
+        if (message.AlertID !== 0) {
+            obj.AlertID = Math.round(message.AlertID);
+        }
+        return obj;
+    },
+    create(base) {
+        return exports.AssetKey.fromPartial(base !== null && base !== void 0 ? base : {});
+    },
+    fromPartial(object) {
+        var _a, _b, _c, _d, _e;
+        const message = createBaseAssetKey();
+        message.Account = (_a = object.Account) !== null && _a !== void 0 ? _a : "";
+        message.AssetKey = (_b = object.AssetKey) !== null && _b !== void 0 ? _b : "";
+        message.OrganizationID = (_c = object.OrganizationID) !== null && _c !== void 0 ? _c : "";
+        message.Network = (_d = object.Network) !== null && _d !== void 0 ? _d : undefined;
+        message.AlertID = (_e = object.AlertID) !== null && _e !== void 0 ? _e : 0;
+        return message;
+    },
+};
+function createBaseAlertFilter() {
+    return { OrganizationID: "", Network: undefined, Offset: undefined, Limit: undefined };
+}
+exports.AlertFilter = {
+    encode(message, writer = minimal_1.default.Writer.create()) {
+        if (message.OrganizationID !== "") {
+            writer.uint32(10).string(message.OrganizationID);
+        }
+        if (message.Network !== undefined) {
+            writer.uint32(24).int32(message.Network);
+        }
+        if (message.Offset !== undefined) {
+            writer.uint32(32).int32(message.Offset);
+        }
+        if (message.Limit !== undefined) {
+            writer.uint32(40).int32(message.Limit);
+        }
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseAlertFilter();
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1:
+                    if (tag !== 10) {
+                        break;
+                    }
+                    message.OrganizationID = reader.string();
+                    continue;
+                case 3:
+                    if (tag !== 24) {
+                        break;
+                    }
+                    message.Network = reader.int32();
+                    continue;
+                case 4:
+                    if (tag !== 32) {
+                        break;
+                    }
+                    message.Offset = reader.int32();
+                    continue;
+                case 5:
+                    if (tag !== 40) {
+                        break;
+                    }
+                    message.Limit = reader.int32();
+                    continue;
+            }
+            if ((tag & 7) === 4 || tag === 0) {
+                break;
+            }
+            reader.skipType(tag & 7);
+        }
+        return message;
+    },
+    fromJSON(object) {
+        return {
+            OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
+            Network: isSet(object.Network) ? (0, metadata_1.networkFromJSON)(object.Network) : undefined,
+            Offset: isSet(object.Offset) ? globalThis.Number(object.Offset) : undefined,
+            Limit: isSet(object.Limit) ? globalThis.Number(object.Limit) : undefined,
+        };
+    },
+    toJSON(message) {
+        const obj = {};
+        if (message.OrganizationID !== "") {
+            obj.OrganizationID = message.OrganizationID;
+        }
+        if (message.Network !== undefined) {
+            obj.Network = (0, metadata_1.networkToJSON)(message.Network);
+        }
+        if (message.Offset !== undefined) {
+            obj.Offset = Math.round(message.Offset);
+        }
+        if (message.Limit !== undefined) {
+            obj.Limit = Math.round(message.Limit);
+        }
+        return obj;
+    },
+    create(base) {
+        return exports.AlertFilter.fromPartial(base !== null && base !== void 0 ? base : {});
+    },
+    fromPartial(object) {
+        var _a, _b, _c, _d;
+        const message = createBaseAlertFilter();
+        message.OrganizationID = (_a = object.OrganizationID) !== null && _a !== void 0 ? _a : "";
+        message.Network = (_b = object.Network) !== null && _b !== void 0 ? _b : undefined;
+        message.Offset = (_c = object.Offset) !== null && _c !== void 0 ? _c : undefined;
+        message.Limit = (_d = object.Limit) !== null && _d !== void 0 ? _d : undefined;
+        return message;
+    },
+};
 exports.AlertServiceService = {
     upsert: {
         path: "/alert.AlertService/Upsert",
@@ -25,8 +235,8 @@ exports.AlertServiceService = {
         path: "/alert.AlertService/Delete",
         requestStream: false,
         responseStream: false,
-        requestSerialize: (value) => Buffer.from(alert_1.AssetKey.encode(value).finish()),
-        requestDeserialize: (value) => alert_1.AssetKey.decode(value),
+        requestSerialize: (value) => Buffer.from(exports.AssetKey.encode(value).finish()),
+        requestDeserialize: (value) => exports.AssetKey.decode(value),
         responseSerialize: (value) => Buffer.from(Empty_1.Empty.encode(value).finish()),
         responseDeserialize: (value) => Empty_1.Empty.decode(value),
     },
@@ -34,8 +244,8 @@ exports.AlertServiceService = {
         path: "/alert.AlertService/Get",
         requestStream: false,
         responseStream: false,
-        requestSerialize: (value) => Buffer.from(alert_1.AssetKey.encode(value).finish()),
-        requestDeserialize: (value) => alert_1.AssetKey.decode(value),
+        requestSerialize: (value) => Buffer.from(exports.AssetKey.encode(value).finish()),
+        requestDeserialize: (value) => exports.AssetKey.decode(value),
         responseSerialize: (value) => Buffer.from(alert_1.Alert.encode(value).finish()),
         responseDeserialize: (value) => alert_1.Alert.decode(value),
     },
@@ -43,10 +253,26 @@ exports.AlertServiceService = {
         path: "/alert.AlertService/List",
         requestStream: false,
         responseStream: false,
-        requestSerialize: (value) => Buffer.from(alert_1.AlertFilter.encode(value).finish()),
-        requestDeserialize: (value) => alert_1.AlertFilter.decode(value),
+        requestSerialize: (value) => Buffer.from(exports.AlertFilter.encode(value).finish()),
+        requestDeserialize: (value) => exports.AlertFilter.decode(value),
         responseSerialize: (value) => Buffer.from(alert_1.AlertList.encode(value).finish()),
         responseDeserialize: (value) => alert_1.AlertList.decode(value),
     },
 };
 exports.AlertServiceClient = (0, grpc_js_1.makeGenericClientConstructor)(exports.AlertServiceService, "alert.AlertService");
+function longToNumber(long) {
+    if (long.gt(globalThis.Number.MAX_SAFE_INTEGER)) {
+        throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
+    }
+    if (long.lt(globalThis.Number.MIN_SAFE_INTEGER)) {
+        throw new globalThis.Error("Value is smaller than Number.MIN_SAFE_INTEGER");
+    }
+    return long.toNumber();
+}
+if (minimal_1.default.util.Long !== long_1.default) {
+    minimal_1.default.util.Long = long_1.default;
+    minimal_1.default.configure();
+}
+function isSet(value) {
+    return value !== null && value !== undefined;
+}

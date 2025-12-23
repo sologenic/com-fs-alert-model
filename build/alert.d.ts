@@ -1,6 +1,6 @@
 import _m0 from "protobufjs/minimal";
 import { Audit } from "./sologenic/com-fs-utils-lib/models/audit/audit";
-import { MetaData, Network } from "./sologenic/com-fs-utils-lib/models/metadata/metadata";
+import { MetaData } from "./sologenic/com-fs-utils-lib/models/metadata/metadata";
 export declare const protobufPackage = "alert";
 export declare enum AlertStatus {
     DO_NOT_USE = 0,
@@ -24,19 +24,6 @@ export interface AlertDetails {
     Status: AlertStatus;
     OrganizationID: string;
 }
-export interface AssetKey {
-    Account: string;
-    AssetKey: string;
-    OrganizationID: string;
-    Network?: Network | undefined;
-    AlertID: string;
-}
-export interface AlertFilter {
-    OrganizationID: string;
-    Network?: Network | undefined;
-    Offset?: number | undefined;
-    Limit?: number | undefined;
-}
 export interface AlertList {
     Alerts: Alert[];
     TotalCount: number;
@@ -56,7 +43,7 @@ export declare const Alert: {
             OrganizationID?: string | undefined;
         } | undefined;
         MetaData?: {
-            Network?: Network | undefined;
+            Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
             UpdatedAt?: Date | undefined;
             CreatedAt?: Date | undefined;
             UpdatedByAccount?: string | undefined;
@@ -83,12 +70,12 @@ export declare const Alert: {
             OrganizationID?: string | undefined;
         } & { [K in Exclude<keyof I["Alert"], keyof AlertDetails>]: never; }) | undefined;
         MetaData?: ({
-            Network?: Network | undefined;
+            Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
             UpdatedAt?: Date | undefined;
             CreatedAt?: Date | undefined;
             UpdatedByAccount?: string | undefined;
         } & {
-            Network?: Network | undefined;
+            Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
             UpdatedAt?: Date | undefined;
             CreatedAt?: Date | undefined;
             UpdatedByAccount?: string | undefined;
@@ -113,7 +100,7 @@ export declare const Alert: {
             OrganizationID?: string | undefined;
         } | undefined;
         MetaData?: {
-            Network?: Network | undefined;
+            Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
             UpdatedAt?: Date | undefined;
             CreatedAt?: Date | undefined;
             UpdatedByAccount?: string | undefined;
@@ -140,12 +127,12 @@ export declare const Alert: {
             OrganizationID?: string | undefined;
         } & { [K_4 in Exclude<keyof I_1["Alert"], keyof AlertDetails>]: never; }) | undefined;
         MetaData?: ({
-            Network?: Network | undefined;
+            Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
             UpdatedAt?: Date | undefined;
             CreatedAt?: Date | undefined;
             UpdatedByAccount?: string | undefined;
         } & {
-            Network?: Network | undefined;
+            Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
             UpdatedAt?: Date | undefined;
             CreatedAt?: Date | undefined;
             UpdatedByAccount?: string | undefined;
@@ -197,66 +184,6 @@ export declare const AlertDetails: {
         OrganizationID?: string | undefined;
     } & { [K_1 in Exclude<keyof I_1, keyof AlertDetails>]: never; }>(object: I_1): AlertDetails;
 };
-export declare const AssetKey: {
-    encode(message: AssetKey, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): AssetKey;
-    fromJSON(object: any): AssetKey;
-    toJSON(message: AssetKey): unknown;
-    create<I extends {
-        Account?: string | undefined;
-        AssetKey?: string | undefined;
-        OrganizationID?: string | undefined;
-        Network?: Network | undefined;
-        AlertID?: string | undefined;
-    } & {
-        Account?: string | undefined;
-        AssetKey?: string | undefined;
-        OrganizationID?: string | undefined;
-        Network?: Network | undefined;
-        AlertID?: string | undefined;
-    } & { [K in Exclude<keyof I, keyof AssetKey>]: never; }>(base?: I | undefined): AssetKey;
-    fromPartial<I_1 extends {
-        Account?: string | undefined;
-        AssetKey?: string | undefined;
-        OrganizationID?: string | undefined;
-        Network?: Network | undefined;
-        AlertID?: string | undefined;
-    } & {
-        Account?: string | undefined;
-        AssetKey?: string | undefined;
-        OrganizationID?: string | undefined;
-        Network?: Network | undefined;
-        AlertID?: string | undefined;
-    } & { [K_1 in Exclude<keyof I_1, keyof AssetKey>]: never; }>(object: I_1): AssetKey;
-};
-export declare const AlertFilter: {
-    encode(message: AlertFilter, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): AlertFilter;
-    fromJSON(object: any): AlertFilter;
-    toJSON(message: AlertFilter): unknown;
-    create<I extends {
-        OrganizationID?: string | undefined;
-        Network?: Network | undefined;
-        Offset?: number | undefined;
-        Limit?: number | undefined;
-    } & {
-        OrganizationID?: string | undefined;
-        Network?: Network | undefined;
-        Offset?: number | undefined;
-        Limit?: number | undefined;
-    } & { [K in Exclude<keyof I, keyof AlertFilter>]: never; }>(base?: I | undefined): AlertFilter;
-    fromPartial<I_1 extends {
-        OrganizationID?: string | undefined;
-        Network?: Network | undefined;
-        Offset?: number | undefined;
-        Limit?: number | undefined;
-    } & {
-        OrganizationID?: string | undefined;
-        Network?: Network | undefined;
-        Offset?: number | undefined;
-        Limit?: number | undefined;
-    } & { [K_1 in Exclude<keyof I_1, keyof AlertFilter>]: never; }>(object: I_1): AlertFilter;
-};
 export declare const AlertList: {
     encode(message: AlertList, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): AlertList;
@@ -273,7 +200,7 @@ export declare const AlertList: {
                 OrganizationID?: string | undefined;
             } | undefined;
             MetaData?: {
-                Network?: Network | undefined;
+                Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                 UpdatedAt?: Date | undefined;
                 CreatedAt?: Date | undefined;
                 UpdatedByAccount?: string | undefined;
@@ -296,7 +223,7 @@ export declare const AlertList: {
                 OrganizationID?: string | undefined;
             } | undefined;
             MetaData?: {
-                Network?: Network | undefined;
+                Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                 UpdatedAt?: Date | undefined;
                 CreatedAt?: Date | undefined;
                 UpdatedByAccount?: string | undefined;
@@ -316,7 +243,7 @@ export declare const AlertList: {
                 OrganizationID?: string | undefined;
             } | undefined;
             MetaData?: {
-                Network?: Network | undefined;
+                Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                 UpdatedAt?: Date | undefined;
                 CreatedAt?: Date | undefined;
                 UpdatedByAccount?: string | undefined;
@@ -343,12 +270,12 @@ export declare const AlertList: {
                 OrganizationID?: string | undefined;
             } & { [K in Exclude<keyof I["Alerts"][number]["Alert"], keyof AlertDetails>]: never; }) | undefined;
             MetaData?: ({
-                Network?: Network | undefined;
+                Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                 UpdatedAt?: Date | undefined;
                 CreatedAt?: Date | undefined;
                 UpdatedByAccount?: string | undefined;
             } & {
-                Network?: Network | undefined;
+                Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                 UpdatedAt?: Date | undefined;
                 CreatedAt?: Date | undefined;
                 UpdatedByAccount?: string | undefined;
@@ -372,7 +299,7 @@ export declare const AlertList: {
                 OrganizationID?: string | undefined;
             } | undefined;
             MetaData?: {
-                Network?: Network | undefined;
+                Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                 UpdatedAt?: Date | undefined;
                 CreatedAt?: Date | undefined;
                 UpdatedByAccount?: string | undefined;
@@ -396,7 +323,7 @@ export declare const AlertList: {
                 OrganizationID?: string | undefined;
             } | undefined;
             MetaData?: {
-                Network?: Network | undefined;
+                Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                 UpdatedAt?: Date | undefined;
                 CreatedAt?: Date | undefined;
                 UpdatedByAccount?: string | undefined;
@@ -419,7 +346,7 @@ export declare const AlertList: {
                 OrganizationID?: string | undefined;
             } | undefined;
             MetaData?: {
-                Network?: Network | undefined;
+                Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                 UpdatedAt?: Date | undefined;
                 CreatedAt?: Date | undefined;
                 UpdatedByAccount?: string | undefined;
@@ -439,7 +366,7 @@ export declare const AlertList: {
                 OrganizationID?: string | undefined;
             } | undefined;
             MetaData?: {
-                Network?: Network | undefined;
+                Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                 UpdatedAt?: Date | undefined;
                 CreatedAt?: Date | undefined;
                 UpdatedByAccount?: string | undefined;
@@ -466,12 +393,12 @@ export declare const AlertList: {
                 OrganizationID?: string | undefined;
             } & { [K_6 in Exclude<keyof I_1["Alerts"][number]["Alert"], keyof AlertDetails>]: never; }) | undefined;
             MetaData?: ({
-                Network?: Network | undefined;
+                Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                 UpdatedAt?: Date | undefined;
                 CreatedAt?: Date | undefined;
                 UpdatedByAccount?: string | undefined;
             } & {
-                Network?: Network | undefined;
+                Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                 UpdatedAt?: Date | undefined;
                 CreatedAt?: Date | undefined;
                 UpdatedByAccount?: string | undefined;
@@ -495,7 +422,7 @@ export declare const AlertList: {
                 OrganizationID?: string | undefined;
             } | undefined;
             MetaData?: {
-                Network?: Network | undefined;
+                Network?: import("./sologenic/com-fs-utils-lib/models/metadata/metadata").Network | undefined;
                 UpdatedAt?: Date | undefined;
                 CreatedAt?: Date | undefined;
                 UpdatedByAccount?: string | undefined;

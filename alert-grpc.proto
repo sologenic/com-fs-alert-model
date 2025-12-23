@@ -4,6 +4,7 @@ package alert;
 
 import "google/protobuf/Empty.proto";
 import "alert.proto";
+import "sologenic/com-fs-utils-lib/models/metadata/metadata.proto";
 
 option go_package = "github.com/sologenic/com-fs-alert-model;alert";
 
@@ -12,4 +13,19 @@ service AlertService {
     rpc Delete(AssetKey) returns (google.protobuf.Empty) {}
     rpc Get(AssetKey) returns (Alert) {}
     rpc List(AlertFilter) returns (AlertList) {}
+}
+
+message AssetKey {
+    string Account = 1;
+    string AssetKey = 2;
+    string OrganizationID = 3; 
+    optional metadata.Network Network = 4;
+    int64 AlertID = 5;
+}
+
+message AlertFilter {
+    string OrganizationID = 1;
+    optional metadata.Network Network = 3;
+    optional int32 Offset = 4;
+    optional int32 Limit = 5;
 }
