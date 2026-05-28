@@ -11,7 +11,7 @@
     "@grpc/grpc-js": "^1.13.3",
     "bignumber.js": "^9.1.1",
     "long": "^5.2.3",
-    "protobufjs": "^7.2.3",
+    "protobufjs": "^7.6.1",
     "protoc-gen-ts": "^0.8.5",
     "ts-proto": "^1.138.0"
   },
