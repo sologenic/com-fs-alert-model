@@ -8,7 +8,7 @@
     "build": "rm -rf ./build && npx tsc -p tsconfig.json"
   },
   "dependencies": {
-    "@grpc/grpc-js": "^1.13.3",
+    "@grpc/grpc-js": "^1.13.5",
     "bignumber.js": "^9.1.1",
     "long": "^5.2.3",
     "protobufjs": "^7.2.3",
